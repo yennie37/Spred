@@ -1,0 +1,133 @@
+@charset "UTF-8";
+@import url(./layout.css);
+
+/* Container */
+.container,
+.login-container,
+.signup-container {background:white;border-radius:20px;padding:50px 40px;width:100%;max-width:420px;box-shadow:0 20px 60px rgba(0, 0, 0, 0.3);}
+/* Progress Bar */
+.progress-bar {display:flex;gap:8px;margin-bottom:40px;}
+.progress-step {flex:1;height:4px;background:#e0e0e0;border-radius:2px;transition:all 0.3s ease;}
+.progress-step.active {background:#667eea;}
+/* Header */
+.header {margin-bottom:35px;}
+.header h1 {font-size:28px;color:#333;margin-bottom:12px;font-weight:700;}
+.header p {color:#666;font-size:15px;}
+.header.center {text-align:center;margin-bottom:40px;}
+/* Form Elements */
+.form-group {margin-bottom:25px;}
+.form-label {display:block;margin-bottom:10px;color:#333;font-weight:600;font-size:15px;}
+.required {color:#e53e3e;margin-left:3px;}
+.form-input {width:100%;padding:14px 16px;border:2px solid #e0e0e0;border-radius:10px;font-size:15px;transition:all 0.3s ease;}
+.form-input:focus {outline:none;border-color:#667eea;}
+.helper-text {margin-top:6px;font-size:13px;color:#999;}
+/* Buttons */
+.button-group {display:flex;gap:10px;flex-wrap:wrap;}
+.option-btn {flex:1;min-width:calc(50% - 5px);padding:12px 20px;border:2px solid #e0e0e0;border-radius:10px;background:white;cursor:pointer;font-size:15px;font-weight:500;color:#666;transition:all 0.3s ease;}
+.option-btn:hover {border-color:#667eea;color:#667eea;}
+.option-btn.selected {background:#667eea;border-color:#667eea;color:white;}
+.next-btn,
+.save-btn,
+.start-btn {width:100%;padding:16px;background:#667eea;color:white;border:none;border-radius:12px;font-size:16px;font-weight:600;cursor:pointer;transition:all 0.3s ease;}
+.next-btn:hover,
+.save-btn:hover,
+.start-btn:hover {background:#5568d3;transform:translateY(-2px);box-shadow:0 4px 12px rgba(102, 126, 234, 0.4);}
+.next-btn:disabled,
+.save-btn:disabled {
+background:#ccc;cursor:not-allowed;transform:none;}
+.next-btn {margin-top:30px;}
+/* Social Login */
+.social-login {display:flex;flex-direction:column;gap:15px;}
+.social-btn {display:flex;align-items:center;justify-content:center;gap:12px;padding:16px 20px;border:1px solid #e0e0e0;border-radius:12px;background:white;cursor:pointer;transition:all 0.3s ease;font-size:16px;font-weight:600;}
+.social-btn:hover {transform:translateY(-2px);box-shadow:0 4px 12px rgba(0, 0, 0, 0.15);}
+.google-btn {color:#333;}
+.google-btn:hover {background:#f8f9fa;}
+.kakao-btn {background:#FEE500;border-color:#FEE500;color:#000000;}
+.kakao-btn:hover {background:#fdd800;border-color:#fdd800;}
+.icon {width:24px;height:24px;}
+/* Info Box */
+.info-box {background:#f8f9ff;border:1px solid #e0e7ff;border-radius:12px;padding:16px;text-align:center;margin-bottom:25px;}
+.info-box p {color:#667eea;font-size:14px;font-weight:500;}
+/* Links */
+.back-link,
+.skip-link {text-align:center;margin-top:30px;}
+.back-link a,
+.skip-link a {color:#667eea;text-decoration:none;font-size:14px;font-weight:500;transition:color 0.3s ease;}
+.back-link a:hover,
+.skip-link a:hover {color:#764ba2;}
+.skip-link {margin-top:20px;}
+.skip-link a {color:#999;}
+/* Initial Setup Page Specific Styles */
+.container {max-width: 500px;}
+.header {text-align: center;margin-bottom: 40px;}
+.header h1 {font-size: 32px;}
+.header p {line-height: 1.5;}
+.steps {display: flex;flex-direction: column;gap: 20px;margin-bottom: 35px;}
+.step-card {display: flex;align-items: center;gap: 20px;padding: 24px;border: 2px solid #e0e0e0;border-radius: 16px;background: #fafafa;transition: all 0.3s ease;}
+.step-card:hover {border-color: #667eea;background: white;transform: translateY(-2px);box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);}
+.step-number {display: flex;align-items: center;justify-content: center;width: 48px;height: 48px;background: linear-gradient(135deg, #667eea, #764ba2);color: white;border-radius: 50%;font-size: 20px;font-weight: 700;flex-shrink: 0;}
+.step-content {flex: 1;}
+.step-title {font-size: 18px;font-weight: 600;color: #333;margin-bottom: 6px;}
+.step-desc {font-size: 14px;color: #666;line-height: 1.4;}
+.step-icon {font-size: 28px;flex-shrink: 0;}
+.info-box {padding: 18px;margin-bottom: 30px;}
+.info-box p {line-height: 1.6;}
+.start-btn {padding: 18px;background: linear-gradient(135deg, #667eea, #764ba2);border-radius: 14px;font-size: 17px;box-shadow: 0 4px 12px rgba(102, 126, 234, 0.3);}
+.start-btn:hover {transform: translateY(-2px);box-shadow: 0 6px 20px rgba(102, 126, 234, 0.4);}
+/* Login Page Specific Styles */
+.logo {text-align: center;margin-bottom: 40px;}
+.logo h1 {font-size: 32px;color: #667eea;font-weight: 700;}
+.logo p {color: #999;margin-top: 8px;font-size: 14px;}
+.social-login {margin-bottom: 30px;}
+.social-btn {padding: 14px 20px;border-radius: 10px;font-size: 15px;font-weight: 500;}
+.icon {width: 20px;height: 20px;}
+.divider {text-align: center;margin: 30px 0;position: relative;}
+.divider::before {content: '';position: absolute;left: 0;top: 50%;width: 100%;height: 1px;background: #e0e0e0;}
+.divider span {background: white;padding: 0 15px;color: #999;font-size: 14px;position: relative;z-index: 1;}
+.signup-section {text-align: center;}
+.signup-text {color: #666;font-size: 14px;margin-bottom: 12px;}
+.signup-link {color: #667eea;text-decoration: none;font-weight: 600;font-size: 15px;display: inline-flex;align-items: center;gap: 5px;transition: all 0.3s ease;}
+.signup-link:hover {color: #764ba2;gap: 8px;}
+.arrow {transition: transform 0.3s ease;}
+.signup-link:hover .arrow {transform: translateX(3px);}
+/* Sport Selection Specific Styles */
+.sport-options {display: flex;flex-direction: column;gap: 15px;margin-bottom: 30px;}
+.sport-btn {display: flex;align-items: center;gap: 15px;padding: 20px 24px;border: 2px solid #e0e0e0;border-radius: 16px;background: white;cursor: pointer;transition: all 0.3s ease;}
+.sport-btn:hover {border-color: #667eea;transform: translateY(-2px);box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);}
+.sport-btn.selected {background: #667eea;border-color: #667eea;color: white;}
+.sport-icon {font-size: 32px;}
+.sport-info {flex: 1;text-align: left;}
+.sport-name {font-size: 18px;font-weight: 600;margin-bottom: 4px;}
+.sport-desc {font-size: 13px;color: #999;}
+.sport-btn.selected .sport-desc {color: rgba(255, 255, 255, 0.8);}
+/* Team Selection Specific Styles */
+.container.team-container {max-width: 480px;}
+.team-grid {display: grid;grid-template-columns: repeat(2, 1fr);gap: 12px;margin-bottom: 25px;}
+.team-btn {display: flex;flex-direction: column;align-items: center;gap: 8px;padding: 20px 16px;border: 2px solid #e0e0e0;border-radius: 14px;background: white;cursor: pointer;transition: all 0.3s ease;font-size: 14px;font-weight: 600;}
+.team-btn:hover {transform: translateY(-2px);box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);}
+.team-btn.selected {border-width: 3px;transform: translateY(-2px);box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);}
+.team-icon {font-size: 28px;}
+.team-name {text-align: center;line-height: 1.3;}
+/* 구단별 색상 */
+.team-btn[data-team="doosan"] {color: #131230;border-color: #131230;}
+.team-btn[data-team="doosan"].selected {background: #131230;color: white;}
+.team-btn[data-team="lg"] {color: #C30452;border-color: #C30452;}
+.team-btn[data-team="lg"].selected {background: #C30452;color: white;}
+.team-btn[data-team="kt"] {color: #000000;border-color: #000000;}
+.team-btn[data-team="kt"].selected {background: #000000;color: white;}
+.team-btn[data-team="ssg"] {color: #CE0E2D;border-color: #CE0E2D;}
+.team-btn[data-team="ssg"].selected {background: #CE0E2D;color: white;}
+.team-btn[data-team="nc"] {color: #1D467D;border-color: #1D467D;}
+.team-btn[data-team="nc"].selected {background: #1D467D;color: white;}
+.team-btn[data-team="kiwoom"] {color: #570514;border-color: #570514;}
+.team-btn[data-team="kiwoom"].selected {background: #570514;color: white;}
+.team-btn[data-team="kia"] {color: #EA0029;border-color: #EA0029;}
+.team-btn[data-team="kia"].selected {background: #EA0029;color: white;}
+.team-btn[data-team="lotte"] {color: #041E42;border-color: #041E42;}
+.team-btn[data-team="lotte"].selected {background: #041E42;color: white;}
+.team-btn[data-team="samsung"] {color: #074CA1;border-color: #074CA1;}
+.team-btn[data-team="samsung"].selected {background: #074CA1;color: white;}
+.team-btn[data-team="hanwha"] {color: #FF6600;border-color: #FF6600;}
+.team-btn[data-team="hanwha"].selected {background: #FF6600;color: white;}
+.team-btn[data-team="none"] {color: #666;border-color: #e0e0e0;}
+.team-btn[data-team="none"].selected {background: #f5f5f5;color: #666;border-color: #999;}

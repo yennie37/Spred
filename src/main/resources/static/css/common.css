@@ -1,269 +1,63 @@
+@charset "UTF-8";
+@import url("https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css");/*폰트*/
 /* Reset & Base Styles */
-* {
-    margin: 0;
-    padding: 0;
-    box-sizing: border-box;
+/* ************************* reset ************************* */
+html, body, div, span, applet, object, iframe,h1, h2, h3, h4, h5, h6, p, blockquote, pre,a, abbr, acronym, address, big, cite, code,del, dfn, em, img, ins, kbd, q, s, samp,small, strike, strong, sub, sup, tt, var,b, u, i, center,dl, dt, dd, ol, ul, li,fieldset, form, label, legend,table, caption, tbody, tfoot, thead, tr, th, td,article, aside, canvas, details, embed,figure, figcaption, footer, header, hgroup,menu, nav, output, ruby, section, summary,time, mark, audio, video {margin:0;padding:0;border:0;font-size:100%;font:inherit;vertical-align:baseline;}
+/* HTML5 display-role reset for older browsers */
+article, aside, details, figcaption, figure,footer, header, hgroup, menu, nav, section {display:block;}
+html{font-size:62.5%;}
+body {line-height:1;}
+ol, ul {list-style:none;}
+blockquote, q {quotes:none;}
+blockquote:before, blockquote:after,q:before, q:after {content:'';content:none;}
+table {border-collapse:collapse;border-spacing:0;}
+*,
+*::before,
+*::after {box-sizing:border-box;}
+/* ************************* 변수 ************************* */
+:root{
+    --bg-color-prime:#667eea;
+    --font-color-prime:#667eea;
+    --border-color-prime:#667eea;
+    --box-shadow-15:0 4px 12px rgba(0,0,0,0.15);
 }
-
-body {
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-    min-height: 100vh;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    padding: 20px;
+body.hanhwa {
+    --bg-color-prime:#FF6600;
+    --border-color-prime:#FF6600;
 }
-
-/* Container */
-.container,
-.login-container,
-.signup-container {
-    background: white;
-    border-radius: 20px;
-    padding: 50px 40px;
-    width: 100%;
-    max-width: 420px;
-    box-shadow: 0 20px 60px rgba(0, 0, 0, 0.3);
+body.doosan {
+    --bg-color-prime:#131230;
+    --border-color-prime:#131230;
 }
-
-/* Progress Bar */
-.progress-bar {
-    display: flex;
-    gap: 8px;
-    margin-bottom: 40px;
+body.lg {
+    --bg-color-prime:#C30452;
+    --border-color-prime:#C30452;
 }
-
-.progress-step {
-    flex: 1;
-    height: 4px;
-    background: #e0e0e0;
-    border-radius: 2px;
-    transition: all 0.3s ease;
+body.kt {
+    --bg-color-prime:#121212;
+    --border-color-prime:#121212;
 }
-
-.progress-step.active {
-    background: #667eea;
+body.ssg {
+    --bg-color-prime:#CE0E2D;
+    --border-color-prime:#CE0E2D;
 }
-
-/* Header */
-.header {
-    margin-bottom: 35px;
+body.nc {
+    --bg-color-prime:#1D467D;
+    --border-color-prime:#1D467D;
 }
-
-.header h1 {
-    font-size: 28px;
-    color: #333;
-    margin-bottom: 12px;
-    font-weight: 700;
+body.kiwoom {
+    --bg-color-prime:#570514;
+    --border-color-prime:#570514;
 }
-
-.header p {
-    color: #666;
-    font-size: 15px;
+body.kia {
+    --bg-color-prime:#EA0029;
+    --border-color-prime:#EA0029;
 }
-
-.header.center {
-    text-align: center;
-    margin-bottom: 40px;
+body.lotte {
+    --bg-color-prime:#041E42;
+    --border-color-prime:#041E42;
 }
-
-/* Form Elements */
-.form-group {
-    margin-bottom: 25px;
-}
-
-.form-label {
-    display: block;
-    margin-bottom: 10px;
-    color: #333;
-    font-weight: 600;
-    font-size: 15px;
-}
-
-.required {
-    color: #e53e3e;
-    margin-left: 3px;
-}
-
-.form-input {
-    width: 100%;
-    padding: 14px 16px;
-    border: 2px solid #e0e0e0;
-    border-radius: 10px;
-    font-size: 15px;
-    transition: all 0.3s ease;
-}
-
-.form-input:focus {
-    outline: none;
-    border-color: #667eea;
-}
-
-.helper-text {
-    margin-top: 6px;
-    font-size: 13px;
-    color: #999;
-}
-
-/* Buttons */
-.button-group {
-    display: flex;
-    gap: 10px;
-    flex-wrap: wrap;
-}
-
-.option-btn {
-    flex: 1;
-    min-width: calc(50% - 5px);
-    padding: 12px 20px;
-    border: 2px solid #e0e0e0;
-    border-radius: 10px;
-    background: white;
-    cursor: pointer;
-    font-size: 15px;
-    font-weight: 500;
-    color: #666;
-    transition: all 0.3s ease;
-}
-
-.option-btn:hover {
-    border-color: #667eea;
-    color: #667eea;
-}
-
-.option-btn.selected {
-    background: #667eea;
-    border-color: #667eea;
-    color: white;
-}
-
-.next-btn,
-.save-btn,
-.start-btn {
-    width: 100%;
-    padding: 16px;
-    background: #667eea;
-    color: white;
-    border: none;
-    border-radius: 12px;
-    font-size: 16px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: all 0.3s ease;
-}
-
-.next-btn:hover,
-.save-btn:hover,
-.start-btn:hover {
-    background: #5568d3;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(102, 126, 234, 0.4);
-}
-
-.next-btn:disabled,
-.save-btn:disabled {
-    background: #ccc;
-    cursor: not-allowed;
-    transform: none;
-}
-
-.next-btn {
-    margin-top: 30px;
-}
-
-/* Social Login */
-.social-login {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-}
-
-.social-btn {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    gap: 12px;
-    padding: 16px 20px;
-    border: 1px solid #e0e0e0;
-    border-radius: 12px;
-    background: white;
-    cursor: pointer;
-    transition: all 0.3s ease;
-    font-size: 16px;
-    font-weight: 600;
-}
-
-.social-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
-}
-
-.google-btn {
-    color: #333;
-}
-
-.google-btn:hover {
-    background: #f8f9fa;
-}
-
-.kakao-btn {
-    background: #FEE500;
-    border-color: #FEE500;
-    color: #000000;
-}
-
-.kakao-btn:hover {
-    background: #fdd800;
-    border-color: #fdd800;
-}
-
-.icon {
-    width: 24px;
-    height: 24px;
-}
-
-/* Info Box */
-.info-box {
-    background: #f8f9ff;
-    border: 1px solid #e0e7ff;
-    border-radius: 12px;
-    padding: 16px;
-    text-align: center;
-    margin-bottom: 25px;
-}
-
-.info-box p {
-    color: #667eea;
-    font-size: 14px;
-    font-weight: 500;
-}
-
-/* Links */
-.back-link,
-.skip-link {
-    text-align: center;
-    margin-top: 30px;
-}
-
-.back-link a,
-.skip-link a {
-    color: #667eea;
-    text-decoration: none;
-    font-size: 14px;
-    font-weight: 500;
-    transition: color 0.3s ease;
-}
-
-.back-link a:hover,
-.skip-link a:hover {
-    color: #764ba2;
-}
-
-.skip-link {
-    margin-top: 20px;
-}
-
-.skip-link a {
-    color: #999;
+body.samsung {
+    --bg-color-prime:#074CA1;
+    --border-color-prime:#074CA1;
 }
