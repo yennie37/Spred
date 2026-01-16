@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>직관기록</title>
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <link rel="stylesheet" href="../../../../../../frontend/src/assets/css/content.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: #f5f5f7;
+            padding-bottom: 70px;
+        }
+
+        .header {
+            background: white;
+            padding: 16px 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #333;
+            text-align: center;
+        }
+
+        .container {
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .season-stats {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .season-select {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            margin-bottom: 16px;
+        }
+
+        .season-select select {
+            flex: 1;
+            padding: 10px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+        }
+
+        .quick-stats {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            padding-top: 12px;
+            border-top: 1px solid #f0f0f0;
+        }
+
+        .quick-stat {
+            text-align: center;
+        }
+
+        .quick-stat-label {
+            font-size: 12px;
+            color: #999;
+            margin-bottom: 4px;
+        }
+
+        .quick-stat-value {
+            font-size: 20px;
+            font-weight: 700;
+            color: #FF6600;
+        }
+
+        .filter-tabs {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 16px;
+            overflow-x: auto;
+            padding-bottom: 4px;
+        }
+
+        .filter-tab {
+            padding: 8px 16px;
+            border: 2px solid #e0e0e0;
+            border-radius: 20px;
+            background: white;
+            font-size: 14px;
+            font-weight: 500;
+            color: #666;
+            cursor: pointer;
+            white-space: nowrap;
+            transition: all 0.2s ease;
+            width: -webkit-fill-available;
+        }
+
+        .filter-tab.active {
+            background: #FF6600;
+            border-color: #FF6600;
+            color: white;
+        }
+
+        .record-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .record-card {
+            background: white;
+            border-radius: 12px;
+            padding: 16px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .record-card:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        }
+
+        .record-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 12px;
+        }
+
+        .record-date {
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .record-badge {
+            padding: 4px 10px;
+            border-radius: 12px;
+            font-size: 12px;
+            font-weight: 600;
+        }
+
+        .record-badge.win {
+            background: #dcfce7;
+            color: #16a34a;
+        }
+
+        .record-badge.lose {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .record-badge.draw {
+            background: #e5e7eb;
+            color: #6b7280;
+        }
+
+        .record-content {
+            display: flex;
+            gap: 12px;
+        }
+
+        .record-image {
+            width: 80px;
+            height: 80px;
+            border-radius: 8px;
+            background: #f5f5f7;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            flex-shrink: 0;
+        }
+
+        .record-info {
+            flex: 1;
+        }
+
+        .record-match {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 6px;
+        }
+
+        .record-details {
+            display: flex;
+            flex-direction: column;
+            gap: 4px;
+        }
+
+        .record-detail {
+            font-size: 13px;
+            color: #666;
+        }
+
+        .record-detail strong {
+            color: #333;
+        }
+
+        .mood-emoji {
+            font-size: 18px;
+            margin-right: 4px;
+        }
+
+        .empty-state {
+            text-align: center;
+            padding: 60px 20px;
+            color: #999;
+        }
+
+        .empty-icon {
+            font-size: 64px;
+            margin-bottom: 16px;
+        }
+
+        .empty-text {
+            font-size: 16px;
+            margin-bottom: 8px;
+        }
+
+        .empty-subtext {
+            font-size: 14px;
+            color: #bbb;
+        }
+
+        .fab {
+            position: fixed;
+            bottom: 90px;
+            right: 20px;
+            width: 56px;
+            height: 56px;
+            background: linear-gradient(135deg, #FF6600, #ff8533);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 28px;
+            color: white;
+            box-shadow: 0 4px 12px rgba(255, 102, 0, 0.4);
+            cursor: pointer;
+            transition: all 0.3s ease;
+            z-index: 50;
+        }
+
+        .fab:hover {
+            transform: scale(1.1);
+            box-shadow: 0 6px 16px rgba(255, 102, 0, 0.5);
+        }
+
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            color: #999;
+            text-decoration: none;
+            font-size: 12px;
+            padding: 4px 16px;
+            transition: color 0.2s ease;
+        }
+
+        .nav-item.active {
+            color: #FF6600;
+        }
+
+        .nav-icon {
+            font-size: 24px;
+        }
+
+        .chart-section {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .chart-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 16px;
+        }
+
+        .chart-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+        }
+
+        .chart-toggle {
+            display: flex;
+            gap: 4px;
+            background: #f5f5f7;
+            padding: 4px;
+            border-radius: 8px;
+        }
+
+        .chart-toggle-btn {
+            padding: 6px 12px;
+            border: none;
+            background: transparent;
+            border-radius: 6px;
+            font-size: 12px;
+            font-weight: 500;
+            color: #666;
+            cursor: pointer;
+            transition: all 0.2s ease;
+        }
+
+        .chart-toggle-btn.active {
+            background: white;
+            color: #FF6600;
+            box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+        }
+
+        .win-rate-chart {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            padding: 16px 0;
+        }
+
+        .donut-chart {
+            position: relative;
+            width: 120px;
+            height: 120px;
+        }
+
+        .donut-ring {
+            transform: rotate(-90deg);
+        }
+
+        .donut-segment {
+            fill: none;
+            stroke-width: 20;
+            transition: all 0.3s ease;
+        }
+
+        .donut-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            text-align: center;
+        }
+
+        .donut-percentage {
+            font-size: 24px;
+            font-weight: 700;
+            color: #16a34a;
+        }
+
+        .donut-label {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .win-rate-legend {
+            flex: 1;
+        }
+
+        .legend-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 8px 0;
+            border-bottom: 1px solid #f0f0f0;
+        }
+
+        .legend-item:last-child {
+            border-bottom: none;
+        }
+
+        .legend-label {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 14px;
+            color: #333;
+        }
+
+        .legend-color {
+            width: 12px;
+            height: 12px;
+            border-radius: 3px;
+        }
+
+        .legend-value {
+            font-weight: 600;
+            color: #666;
+        }
+
+        .monthly-chart {
+            padding: 16px 0;
+        }
+
+        .bar-chart {
+            display: flex;
+            align-items: flex-end;
+            gap: 8px;
+            height: 150px;
+            padding: 10px 0;
+        }
+
+        .bar-item {
+            flex: 1;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .bar {
+            width: 100%;
+            background: linear-gradient(to top, #FF6600, #ff8533);
+            border-radius: 4px 4px 0 0;
+            min-height: 4px;
+            position: relative;
+            transition: all 0.3s ease;
+        }
+
+        .bar:hover {
+            opacity: 0.8;
+        }
+
+        .bar-value {
+            position: absolute;
+            top: -20px;
+            left: 50%;
+            transform: translateX(-50%);
+            font-size: 11px;
+            font-weight: 600;
+            color: #FF6600;
+        }
+
+        .bar-label {
+            font-size: 11px;
+            color: #999;
+            font-weight: 500;
+        }
+
+        .stadium-chart {
+            padding: 16px 0;
+        }
+
+        .stadium-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .stadium-item {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .stadium-name {
+            font-size: 13px;
+            color: #333;
+            min-width: 80px;
+        }
+
+        .stadium-bar-container {
+            flex: 1;
+            height: 24px;
+            background: #f5f5f7;
+            border-radius: 12px;
+            overflow: hidden;
+            position: relative;
+        }
+
+        .stadium-bar {
+            height: 100%;
+            background: linear-gradient(to right, #FF6600, #ff8533);
+            border-radius: 12px;
+            transition: width 0.5s ease;
+        }
+
+        .stadium-count {
+            position: absolute;
+            right: 8px;
+            top: 50%;
+            transform: translateY(-50%);
+            font-size: 11px;
+            font-weight: 600;
+            color: #666;
+        }
+
+        .chart-container {
+            display: none;
+        }
+
+        .chart-container.active {
+            display: block;
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <div class="header-title">직관기록 ⚾</div>
+</div>
+
+<div class="container">
+    <div class="season-stats">
+        <div class="season-select">
+            <select id="seasonSelect" onchange="changeSeason()">
+                <option value="2025">2025 시즌</option>
+                <option value="2026">2026 시즌</option>
+                <option value="2027">2027 시즌</option>
+            </select>
+        </div>
+        <div class="quick-stats">
+            <div class="quick-stat">
+                <div class="quick-stat-label">총 관람</div>
+                <div class="quick-stat-value">44회</div>
+            </div>
+            <div class="quick-stat">
+                <div class="quick-stat-label">승률</div>
+                <div class="quick-stat-value">59%</div>
+            </div>
+            <div class="quick-stat">
+                <div class="quick-stat-label">총 지출</div>
+                <div class="quick-stat-value">1.3M</div>
+            </div>
+        </div>
+    </div>
+
+    <div class="filter-tabs">
+        <button class="filter-tab active">전체</button>
+        <button class="filter-tab">정규시즌</button>
+        <button class="filter-tab">포스트시즌</button>
+        <button class="filter-tab">시범경기</button>
+    </div>
+
+    <!-- 차트 섹션 -->
+    <div class="chart-section">
+        <div class="chart-header">
+            <div class="chart-title">📊 통계</div>
+            <div class="chart-toggle">
+                <button class="chart-toggle-btn active" onclick="showChart('winRate')">승률</button>
+                <button class="chart-toggle-btn" onclick="showChart('monthly')">월별</button>
+                <button class="chart-toggle-btn" onclick="showChart('stadium')">구장</button>
+                <button class="chart-toggle-btn" onclick="showChart('homeAway')">홈/원정</button>
+            </div>
+        </div>
+
+        <!-- 승률 차트 -->
+        <div class="chart-container active" id="winRateChart">
+            <div class="win-rate-chart">
+                <div class="donut-chart">
+                    <svg width="120" height="120">
+                        <circle class="donut-ring" cx="60" cy="60" r="50"
+                                fill="none" stroke="#f0f0f0" stroke-width="20"></circle>
+                        <circle class="donut-segment" cx="60" cy="60" r="50"
+                                stroke="#16a34a"
+                                stroke-dasharray="186 314"
+                                stroke-linecap="round"></circle>
+                        <circle class="donut-segment" cx="60" cy="60" r="50"
+                                stroke="#dc2626"
+                                stroke-dasharray="130 314"
+                                stroke-dashoffset="-186"
+                                stroke-linecap="round"></circle>
+                    </svg>
+                    <div class="donut-text">
+                        <div class="donut-percentage">59%</div>
+                        <div class="donut-label">승률</div>
+                    </div>
+                </div>
+                <div class="win-rate-legend">
+                    <div class="legend-item">
+                        <div class="legend-label">
+                            <div class="legend-color" style="background: #16a34a;"></div>
+                            <span>승리</span>
+                        </div>
+                        <div class="legend-value">26회 (59%)</div>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-label">
+                            <div class="legend-color" style="background: #dc2626;"></div>
+                            <span>패배</span>
+                        </div>
+                        <div class="legend-value">18회 (41%)</div>
+                    </div>
+                    <div class="legend-item">
+                        <div class="legend-label">
+                            <div class="legend-color" style="background: #9ca3af;"></div>
+                            <span>무승부</span>
+                        </div>
+                        <div class="legend-value">0회 (0%)</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 월별 차트 -->
+        <div class="chart-container" id="monthlyChart">
+            <div class="monthly-chart">
+                <div class="bar-chart">
+                    <div class="bar-item">
+                        <div class="bar" style="height: 40%;">
+                            <div class="bar-value">4</div>
+                        </div>
+                        <div class="bar-label">3월</div>
+                    </div>
+                    <div class="bar-item">
+                        <div class="bar" style="height: 80%;">
+                            <div class="bar-value">8</div>
+                        </div>
+                        <div class="bar-label">4월</div>
+                    </div>
+                    <div class="bar-item">
+                        <div class="bar" style="height: 100%;">
+                            <div class="bar-value">10</div>
+                        </div>
+                        <div class="bar-label">5월</div>
+                    </div>
+                    <div class="bar-item">
+                        <div class="bar" style="height: 70%;">
+                            <div class="bar-value">7</div>
+                        </div>
+                        <div class="bar-label">6월</div>
+                    </div>
+                    <div class="bar-item">
+                        <div class="bar" style="height: 60%;">
+                            <div class="bar-value">6</div>
+                        </div>
+                        <div class="bar-label">7월</div>
+                    </div>
+                    <div class="bar-item">
+                        <div class="bar" style="height: 90%;">
+                            <div class="bar-value">9</div>
+                        </div>
+                        <div class="bar-label">8월</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 구장별 차트 -->
+        <div class="chart-container" id="stadiumChart">
+            <div class="stadium-chart">
+                <div class="stadium-list">
+                    <div class="stadium-item">
+                        <div class="stadium-name">대전</div>
+                        <div class="stadium-bar-container">
+                            <div class="stadium-bar" style="width: 100%;"></div>
+                            <div class="stadium-count">28회</div>
+                        </div>
+                    </div>
+                    <div class="stadium-item">
+                        <div class="stadium-name">잠실</div>
+                        <div class="stadium-bar-container">
+                            <div class="stadium-bar" style="width: 35%;"></div>
+                            <div class="stadium-count">10회</div>
+                        </div>
+                    </div>
+                    <div class="stadium-item">
+                        <div class="stadium-name">고척</div>
+                        <div class="stadium-bar-container">
+                            <div class="stadium-bar" style="width: 18%;"></div>
+                            <div class="stadium-count">5회</div>
+                        </div>
+                    </div>
+                    <div class="stadium-item">
+                        <div class="stadium-name">기타</div>
+                        <div class="stadium-bar-container">
+                            <div class="stadium-bar" style="width: 4%;"></div>
+                            <div class="stadium-count">1회</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 홈/원정 차트 -->
+        <div class="chart-container" id="homeAwayChart">
+            <div class="win-rate-chart">
+                <div style="flex: 1;">
+                    <div style="text-align: center; margin-bottom: 20px;">
+                        <div style="font-size: 14px; color: #666; margin-bottom: 8px;">홈 경기</div>
+                        <div style="position: relative; display: inline-block;">
+                            <svg width="100" height="100">
+                                <circle cx="50" cy="50" r="40" fill="none" stroke="#f0f0f0" stroke-width="16"></circle>
+                                <circle cx="50" cy="50" r="40" fill="none" stroke="#FF6600" stroke-width="16"
+                                        stroke-dasharray="176 252" stroke-linecap="round"
+                                        transform="rotate(-90 50 50)"></circle>
+                            </svg>
+                            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
+                                <div style="font-size: 20px; font-weight: 700; color: #FF6600;">70%</div>
+                            </div>
+                        </div>
+                        <div style="margin-top: 12px;">
+                            <div style="font-size: 13px; color: #666; margin-bottom: 4px;">총 30경기</div>
+                            <div style="font-size: 14px;"><span style="color: #16a34a; font-weight: 600;">21승</span> <span style="color: #dc2626; font-weight: 600;">9패</span></div>
+                        </div>
+                    </div>
+                </div>
+                <div style="flex: 1;">
+                    <div style="text-align: center; margin-bottom: 20px;">
+                        <div style="font-size: 14px; color: #666; margin-bottom: 8px;">원정 경기</div>
+                        <div style="position: relative; display: inline-block;">
+                            <svg width="100" height="100">
+                                <circle cx="50" cy="50" r="40" fill="none" stroke="#f0f0f0" stroke-width="16"></circle>
+                                <circle cx="50" cy="50" r="40" fill="none" stroke="#667eea" stroke-width="16"
+                                        stroke-dasharray="113 252" stroke-linecap="round"
+                                        transform="rotate(-90 50 50)"></circle>
+                            </svg>
+                            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
+                                <div style="font-size: 20px; font-weight: 700; color: #667eea;">36%</div>
+                            </div>
+                        </div>
+                        <div style="margin-top: 12px;">
+                            <div style="font-size: 13px; color: #666; margin-bottom: 4px;">총 14경기</div>
+                            <div style="font-size: 14px;"><span style="color: #16a34a; font-weight: 600;">5승</span> <span style="color: #dc2626; font-weight: 600;">9패</span></div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="record-list">
+        <div class="record-card" onclick="viewRecord(1)">
+            <div class="record-header">
+                <div class="record-date">2025.04.05 (토) 18:30</div>
+                <div class="record-badge win">승</div>
+            </div>
+            <div class="record-content">
+                <div class="record-image">📸</div>
+                <div class="record-info">
+                    <div class="record-match">한화 vs 삼성 (5:3)</div>
+                    <div class="record-details">
+                        <div class="record-detail">
+                            <span class="mood-emoji">😊</span><strong>대전 한화생명</strong>
+                        </div>
+                        <div class="record-detail">1루 내야지정석 / 35,000원</div>
+                        <div class="record-detail">👥 지인, 은진와 함께</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="record-card" onclick="viewRecord(2)">
+            <div class="record-header">
+                <div class="record-date">2025.03.28 (금) 18:30</div>
+                <div class="record-badge win">승</div>
+            </div>
+            <div class="record-content">
+                <div class="record-image">⚾</div>
+                <div class="record-info">
+                    <div class="record-match">한화 vs KT (7:2)</div>
+                    <div class="record-details">
+                        <div class="record-detail">
+                            <span class="mood-emoji">🤩</span><strong>대전 한화생명</strong>
+                        </div>
+                        <div class="record-detail">외야자유석 / 12,000원</div>
+                        <div class="record-detail">👤 혼자 관람</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="record-card" onclick="viewRecord(3)">
+            <div class="record-header">
+                <div class="record-date">2025.03.22 (토) 14:00</div>
+                <div class="record-badge lose">패</div>
+            </div>
+            <div class="record-content">
+                <div class="record-image">🏟️</div>
+                <div class="record-info">
+                    <div class="record-match">한화 vs 두산 (3:8)</div>
+                    <div class="record-details">
+                        <div class="record-detail">
+                            <span class="mood-emoji">😐</span><strong>잠실 야구장</strong>
+                        </div>
+                        <div class="record-detail">3루 테이블석 / 45,000원</div>
+                        <div class="record-detail">👥 가족과 함께</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="fab" onclick="addRecord()">+</div>
+
+<div class="bottom-nav">
+    <a href="dashboard.html" class="nav-item">
+        <div class="nav-icon">🏠</div>
+        <div>홈</div>
+    </a>
+    <a href="#" class="nav-item active">
+        <div class="nav-icon">⚾</div>
+        <div>직관기록</div>
+    </a>
+    <a href="#" class="nav-item" onclick="alert('소비기록 페이지 (구현 예정)'); return false;">
+        <div class="nav-icon">💰</div>
+        <div>소비기록</div>
+    </a>
+</div>
+
+<script>
+        function changeSeason() {
+            const select = document.getElementById('seasonSelect');
+            alert(`${select.value} 시즌으로 변경`);
+        }
+
+        function viewRecord(id) {
+            alert(`기록 상세보기 (ID: ${id})`);
+            window.location.href = 'record-detail.html';
+        }
+
+        function addRecord() {
+            window.location.href = 'record-add.html';
+        }
+
+        function showChart(type) {
+            // 토글 버튼 활성화
+            document.querySelectorAll('.chart-toggle-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+            event.target.classList.add('active');
+
+            // 차트 전환
+            document.querySelectorAll('.chart-container').forEach(chart => {
+                chart.classList.remove('active');
+            });
+
+            if (type === 'winRate') {
+                document.getElementById('winRateChart').classList.add('active');
+            } else if (type === 'monthly') {
+                document.getElementById('monthlyChart').classList.add('active');
+            } else if (type === 'stadium') {
+                document.getElementById('stadiumChart').classList.add('active');
+            } else if (type === 'homeAway') {
+                document.getElementById('homeAwayChart').classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>

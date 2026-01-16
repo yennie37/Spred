@@ -1,0 +1,345 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>문의하기</title>
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <link rel="stylesheet" href="../../../../../../frontend/src/assets/css/content.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: #f5f5f7;
+            min-height: 100vh;
+            padding-bottom: 100px;
+        }
+
+        .header {
+            background: white;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .back-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 4px;
+            color: #333;
+        }
+
+        .header-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .container {
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .intro-box {
+            background: white;
+            border-radius: 12px;
+            padding: 24px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            text-align: center;
+        }
+
+        .intro-icon {
+            font-size: 48px;
+            margin-bottom: 12px;
+        }
+
+        .intro-title {
+            font-size: 20px;
+            font-weight: 700;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .intro-desc {
+            font-size: 14px;
+            color: #666;
+            line-height: 1.6;
+        }
+
+        .form-section {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            margin-bottom: 16px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group:last-child {
+            margin-bottom: 0;
+        }
+
+        .form-label {
+            display: block;
+            font-size: 14px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 8px;
+        }
+
+        .required {
+            color: #e53e3e;
+        }
+
+        .form-input, .form-select, .form-textarea {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 15px;
+            transition: border-color 0.2s ease;
+        }
+
+        .form-input:focus, .form-select:focus, .form-textarea:focus {
+            outline: none;
+            border-color: #FF6600;
+        }
+
+        .form-textarea {
+            min-height: 150px;
+            resize: vertical;
+            font-family: inherit;
+        }
+
+        .helper-text {
+            font-size: 12px;
+            color: #999;
+            margin-top: 6px;
+        }
+
+        .category-buttons {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 10px;
+        }
+
+        .category-btn {
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            background: white;
+            font-size: 14px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.2s ease;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 6px;
+        }
+
+        .category-btn:hover {
+            border-color: #FF6600;
+        }
+
+        .category-btn.selected {
+            background: #FF6600;
+            border-color: #FF6600;
+            color: white;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 16px;
+            background: linear-gradient(135deg, #FF6600, #ff8533);
+            color: white;
+            border: none;
+            border-radius: 12px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 12px rgba(255, 102, 0, 0.3);
+        }
+
+        .submit-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 16px rgba(255, 102, 0, 0.4);
+        }
+
+        .submit-btn:disabled {
+            background: #ccc;
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .contact-info {
+            background: #f9f9f9;
+            border-radius: 8px;
+            padding: 16px;
+            margin-top: 12px;
+        }
+
+        .contact-item {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .contact-item:last-child {
+            margin-bottom: 0;
+        }
+
+        .contact-icon {
+            font-size: 16px;
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <button class="back-btn" onclick="goBack()">←</button>
+    <div class="header-title">문의하기 / 의견 보내기</div>
+</div>
+
+<div class="container">
+    <div class="intro-box">
+        <div class="intro-icon">💌</div>
+        <div class="intro-title">소중한 의견을 들려주세요</div>
+        <div class="intro-desc">
+            불편사항, 제안사항, 오류 신고 등<br>
+            무엇이든 편하게 보내주세요!
+        </div>
+    </div>
+
+    <form id="feedbackForm">
+        <div class="form-section">
+            <div class="form-group">
+                <label class="form-label">문의 유형 <span class="required">*</span></label>
+                <div class="category-buttons">
+                    <button type="button" class="category-btn selected" data-type="bug" onclick="selectCategory(this)">
+                        🐛 오류 신고
+                    </button>
+                    <button type="button" class="category-btn" data-type="feature" onclick="selectCategory(this)">
+                        ✨ 기능 제안
+                    </button>
+                    <button type="button" class="category-btn" data-type="improvement" onclick="selectCategory(this)">
+                        💡 개선 의견
+                    </button>
+                    <button type="button" class="category-btn" data-type="etc" onclick="selectCategory(this)">
+                        📝 기타
+                    </button>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">이메일 <span class="required">*</span></label>
+                <input type="email" class="form-input" id="emailInput" placeholder="답변 받으실 이메일 주소" required>
+                <div class="helper-text">답변이 필요한 경우 입력해주세요</div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">제목 <span class="required">*</span></label>
+                <input type="text" class="form-input" id="titleInput" placeholder="간단한 제목을 입력해주세요" required>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">내용 <span class="required">*</span></label>
+                <textarea class="form-textarea" id="contentInput" placeholder="자세한 내용을 작성해주세요.&#10;&#10;예시:&#10;- 발생한 문제나 상황&#10;- 기대했던 동작&#10;- 실제로 발생한 동작&#10;- 재현 방법" required></textarea>
+                <div class="helper-text">구체적으로 작성해주실수록 빠른 해결이 가능합니다</div>
+            </div>
+        </div>
+
+        <button type="submit" class="submit-btn">의견 보내기</button>
+
+        <div class="contact-info">
+            <div class="contact-item">
+                <span class="contact-icon">📧</span>
+                <span>이메일: support@spred.com</span>
+            </div>
+            <div class="contact-item">
+                <span class="contact-icon">⏰</span>
+                <span>평균 응답 시간: 2-3 영업일</span>
+            </div>
+        </div>
+    </form>
+</div>
+
+<script>
+        let selectedType = 'bug';
+
+        function selectCategory(btn) {
+            document.querySelectorAll('.category-btn').forEach(b => {
+                b.classList.remove('selected');
+            });
+            btn.classList.add('selected');
+            selectedType = btn.dataset.type;
+        }
+
+        document.getElementById('feedbackForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+
+            const email = document.getElementById('emailInput').value;
+            const title = document.getElementById('titleInput').value;
+            const content = document.getElementById('contentInput').value;
+
+            const categoryNames = {
+                bug: '오류 신고',
+                feature: '기능 제안',
+                improvement: '개선 의견',
+                etc: '기타'
+            };
+
+            // 이메일 본문 구성
+            const mailBody = `문의 유형: ${categoryNames[selectedType]}%0D%0A` +
+                            `이메일: ${email}%0D%0A` +
+                            `제목: ${title}%0D%0A%0D%0A` +
+                            `내용:%0D%0A${encodeURIComponent(content)}%0D%0A%0D%0A` +
+                            `----%0D%0A` +
+                            `보낸 날짜: ${new Date().toLocaleString('ko-KR')}`;
+
+            const mailSubject = `[${categoryNames[selectedType]}] ${title}`;
+
+            // mailto 링크 생성
+            const mailtoLink = `mailto:support@spred.com?subject=${encodeURIComponent(mailSubject)}&body=${mailBody}`;
+
+            // 메일 클라이언트 열기
+            window.location.href = mailtoLink;
+
+            // 확인 메시지
+            setTimeout(() => {
+                if (confirm('메일 앱이 열렸나요?\n열리지 않았다면 "확인"을 눌러 다시 시도해주세요.')) {
+                    // 재시도
+                    window.location.href = mailtoLink;
+                } else {
+                    alert('의견을 보내주셔서 감사합니다! 💌');
+                    window.history.back();
+                }
+            }, 1000);
+        });
+
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</body>
+</html>

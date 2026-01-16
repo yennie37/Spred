@@ -1,0 +1,521 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>대시보드</title>
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <link rel="stylesheet" href="../../../../../../frontend/src/assets/css/content.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: #f5f5f7;
+            padding-bottom: 70px;
+        }
+
+        /* 상단바 */
+        .header {
+            background: white;
+            padding: 16px 20px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .header-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .nickname {
+            color: #FF6600;
+        }
+
+        .menu-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 4px;
+            color: #333;
+        }
+
+        /* 사이드 메뉴 */
+        .sidebar {
+            position: fixed;
+            top: 0;
+            right: -300px;
+            width: 300px;
+            height: 100vh;
+            background: white;
+            box-shadow: -2px 0 8px rgba(0, 0, 0, 0.1);
+            transition: right 0.3s ease;
+            z-index: 1000;
+        }
+
+        .sidebar.open {
+            right: 0;
+        }
+
+        .sidebar-header {
+            padding: 20px;
+            background: linear-gradient(135deg, #FF6600, #ff8533);
+            color: white;
+        }
+
+        .sidebar-header h2 {
+            font-size: 20px;
+            margin-bottom: 4px;
+        }
+
+        .sidebar-header p {
+            font-size: 14px;
+            opacity: 0.9;
+        }
+
+        .sidebar-menu {
+            padding: 10px 0;
+        }
+
+        .menu-item {
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            color: #333;
+            text-decoration: none;
+            transition: background 0.2s ease;
+            cursor: pointer;
+            border: none;
+            background: none;
+            width: 100%;
+            text-align: left;
+            font-size: 15px;
+        }
+
+        .menu-item:hover {
+            background: #f5f5f7;
+        }
+
+        .menu-item.danger {
+            color: #e53e3e;
+        }
+
+        .overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            display: none;
+            z-index: 999;
+        }
+
+        .overlay.show {
+            display: block;
+        }
+
+        /* 대시보드 내용 */
+        .container {
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .season-select {
+            background: white;
+            padding: 16px;
+            border-radius: 12px;
+            margin-bottom: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .season-select label {
+            display: block;
+            font-size: 14px;
+            color: #666;
+            margin-bottom: 8px;
+            font-weight: 500;
+        }
+
+        .season-select select {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #e0e0e0;
+            border-radius: 8px;
+            font-size: 15px;
+            font-weight: 600;
+            background: white;
+            cursor: pointer;
+        }
+
+        .season-info {
+            background: #fff8f0;
+            padding: 12px;
+            border-radius: 8px;
+            margin-top: 10px;
+            font-size: 13px;
+            color: #FF6600;
+        }
+
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 12px;
+            margin-bottom: 20px;
+        }
+
+        .stat-card {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .stat-card.full-width {
+            grid-column: 1 / -1;
+        }
+
+        .stat-label {
+            font-size: 13px;
+            color: #666;
+            margin-bottom: 8px;
+        }
+
+        .stat-value {
+            font-size: 28px;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .stat-unit {
+            font-size: 16px;
+            color: #666;
+            margin-left: 2px;
+        }
+
+        .stat-card.highlight .stat-value {
+            color: #FF6600;
+        }
+
+        .recent-games {
+            background: white;
+            padding: 20px;
+            border-radius: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .recent-games h3 {
+            font-size: 16px;
+            color: #333;
+            margin-bottom: 16px;
+            font-weight: 600;
+        }
+
+        .game-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .game-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 12px;
+            background: #f9f9f9;
+            border-radius: 8px;
+        }
+
+        .game-date {
+            font-size: 14px;
+            color: #666;
+            font-weight: 500;
+        }
+
+        .game-info {
+            font-size: 14px;
+            color: #333;
+        }
+
+        .game-result {
+            font-size: 14px;
+            font-weight: 600;
+            padding: 4px 12px;
+            border-radius: 6px;
+        }
+
+        .game-result.win {
+            background: #dcfce7;
+            color: #16a34a;
+        }
+
+        .game-result.lose {
+            background: #fee2e2;
+            color: #dc2626;
+        }
+
+        .no-data {
+            text-align: center;
+            padding: 40px 20px;
+            color: #999;
+        }
+
+        .no-data-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+        /* 하단 네비게이션 */
+        .bottom-nav {
+            position: fixed;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: white;
+            display: flex;
+            justify-content: space-around;
+            padding: 12px 0;
+            box-shadow: 0 -2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .nav-item {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 4px;
+            color: #999;
+            text-decoration: none;
+            font-size: 12px;
+            padding: 4px 16px;
+            transition: color 0.2s ease;
+        }
+
+        .nav-item.active {
+            color: #FF6600;
+        }
+
+        .nav-icon {
+            font-size: 24px;
+        }
+    </style>
+</head>
+<body>
+<!-- 상단바 -->
+<div class="header">
+    <div class="header-title">
+        <span class="nickname">기록해연</span> 님의 응원 기록
+    </div>
+    <button class="menu-btn" onclick="toggleSidebar()">☰</button>
+</div>
+
+<!-- 사이드 메뉴 오버레이 -->
+<div class="overlay" id="overlay" onclick="toggleSidebar()"></div>
+
+<!-- 사이드 메뉴 -->
+<div class="sidebar" id="sidebar">
+    <div class="sidebar-header">
+        <h2>한화 이글스 🦅</h2>
+        <p>기록해연 님</p>
+    </div>
+    <div class="sidebar-menu">
+        <div class="menu-item" onclick="alert('종목 관리 기능 (구현 예정)')">
+            ⚾ 종목 관리
+        </div>
+        <div class="menu-item" onclick="alert('우리팀 변경 기능 (구현 예정)')">
+            🔄 우리팀 변경
+        </div>
+        <div class="menu-item" onclick="alert('문의하기 기능 (구현 예정)')">
+            📧 문의하기 / 의견 보내기
+        </div>
+        <div class="menu-item danger" onclick="confirmReset()">
+            🗑️ 데이터 초기화
+        </div>
+    </div>
+</div>
+
+<!-- 메인 컨텐츠 -->
+<div class="container">
+    <!-- 시즌 선택 -->
+    <div class="season-select">
+        <label for="seasonSelect">시즌 선택</label>
+        <select id="seasonSelect" onchange="changeSeason()">
+            <option value="2025">2025 시즌</option>
+            <option value="2026">2026 시즌</option>
+            <option value="2027">2027 시즌</option>
+        </select>
+        <div class="season-info" id="seasonInfo">
+            📅 2025 시즌 기간: 2025.03.22 ~ 2025.10.05
+        </div>
+    </div>
+
+    <!-- 통계 카드 -->
+    <div class="stats-grid">
+        <div class="stat-card highlight full-width">
+            <div class="stat-label">직관 횟수</div>
+            <div class="stat-value">44<span class="stat-unit">회</span></div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">승패 마진</div>
+            <div class="stat-value">+8</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">승률</div>
+            <div class="stat-value">59.1<span class="stat-unit">%</span></div>
+        </div>
+        <div class="stat-card full-width">
+            <div class="stat-label">이번 시즌 지출</div>
+            <div class="stat-value">1,339,000<span class="stat-unit">원</span></div>
+        </div>
+    </div>
+
+    <!-- 최근 직관 기록 -->
+    <div class="recent-games" id="recentGames">
+        <h3>최근 직관 기록</h3>
+        <div class="game-list">
+            <div class="game-item">
+                <div>
+                    <div class="game-date">04.05</div>
+                </div>
+                <div class="game-info">vs 삼성</div>
+                <div class="game-result win">승</div>
+            </div>
+            <div class="game-item">
+                <div>
+                    <div class="game-date">03.28</div>
+                </div>
+                <div class="game-info">vs KT</div>
+                <div class="game-result win">승</div>
+            </div>
+            <div class="game-item">
+                <div>
+                    <div class="game-date">03.22</div>
+                </div>
+                <div class="game-info">vs 두산</div>
+                <div class="game-result lose">패</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<!-- 하단 네비게이션 -->
+<div class="bottom-nav">
+    <a href="#" class="nav-item active">
+        <div class="nav-icon">🏠</div>
+        <div>홈</div>
+    </a>
+    <a href="#" class="nav-item" onclick="alert('직관기록 페이지 (구현 예정)'); return false;">
+        <div class="nav-icon">⚾</div>
+        <div>직관기록</div>
+    </a>
+    <a href="#" class="nav-item" onclick="alert('소비기록 페이지 (구현 예정)'); return false;">
+        <div class="nav-icon">💰</div>
+        <div>소비기록</div>
+    </a>
+</div>
+
+<script>
+        const seasonData = {
+            2025: {
+                period: '2025.03.22 ~ 2025.10.05',
+                games: [
+                    { date: '04.05', opponent: '삼성', result: 'win' },
+                    { date: '03.28', opponent: 'KT', result: 'win' },
+                    { date: '03.22', opponent: '두산', result: 'lose' }
+                ],
+                stats: {
+                    games: 44,
+                    margin: 8,
+                    winRate: 59.1,
+                    spent: 1339
+                }
+            },
+            2026: {
+                period: '2026.03.21 ~ 2026.10.04',
+                games: [],
+                stats: {
+                    games: 0,
+                    margin: 0,
+                    winRate: 0,
+                    spent: 0
+                }
+            },
+            2027: {
+                period: '시즌 기간 미확정',
+                games: [],
+                stats: {
+                    games: 0,
+                    margin: 0,
+                    winRate: 0,
+                    spent: 0
+                }
+            }
+        };
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            sidebar.classList.toggle('open');
+            overlay.classList.toggle('show');
+        }
+
+        function confirmReset() {
+            if (confirm('정말로 모든 데이터를 초기화하시겠습니까?\n이 작업은 되돌릴 수 없습니다.')) {
+                alert('데이터가 초기화되었습니다.');
+                toggleSidebar();
+            }
+        }
+
+        function changeSeason() {
+            const select = document.getElementById('seasonSelect');
+            const season = select.value;
+            const data = seasonData[season];
+
+            // 시즌 정보 업데이트
+            document.getElementById('seasonInfo').textContent =
+                `📅 ${season} 시즌 기간: ${data.period}`;
+
+            // 통계 업데이트
+            document.querySelectorAll('.stat-value')[0].innerHTML =
+                `${data.stats.games}<span class="stat-unit">회</span>`;
+            document.querySelectorAll('.stat-value')[1].textContent =
+                data.stats.margin > 0 ? `+${data.stats.margin}` : data.stats.margin;
+            document.querySelectorAll('.stat-value')[2].innerHTML =
+                `${data.stats.winRate}<span class="stat-unit">%</span>`;
+            document.querySelectorAll('.stat-value')[3].innerHTML =
+                `${data.stats.spent}<span class="stat-unit">원</span>`;
+
+            // 최근 기록 업데이트
+            const recentGames = document.getElementById('recentGames');
+
+            if (data.games.length === 0) {
+                recentGames.style.display = 'none';
+            } else {
+                recentGames.style.display = 'block';
+                const gameList = recentGames.querySelector('.game-list');
+                gameList.innerHTML = data.games.map(game => `
+                    <div class="game-item">
+                        <div>
+                            <div class="game-date">${game.date}</div>
+                        </div>
+                        <div class="game-info">vs ${game.opponent}</div>
+                        <div class="game-result ${game.result}">${game.result === 'win' ? '승' : '패'}</div>
+                    </div>
+                `).join('');
+            }
+        }
+    </script>
+</body>
+</html>

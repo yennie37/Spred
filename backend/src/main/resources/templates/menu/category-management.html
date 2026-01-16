@@ -1,0 +1,307 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>종목 관리</title>
+    <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
+    <link rel="stylesheet" href="../../../../../../frontend/src/assets/css/content.css">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+            background: #f5f5f7;
+            min-height: 100vh;
+        }
+
+        .header {
+            background: white;
+            padding: 16px 20px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            position: sticky;
+            top: 0;
+            z-index: 100;
+        }
+
+        .back-btn {
+            background: none;
+            border: none;
+            font-size: 24px;
+            cursor: pointer;
+            padding: 4px;
+            color: #333;
+        }
+
+        .header-title {
+            font-size: 18px;
+            font-weight: 700;
+            color: #333;
+        }
+
+        .container {
+            padding: 20px;
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .info-box {
+            background: #fff8f0;
+            border: 1px solid #ffe8cc;
+            border-radius: 12px;
+            padding: 16px;
+            margin-bottom: 20px;
+            display: flex;
+            gap: 12px;
+        }
+
+        .info-icon {
+            font-size: 24px;
+            flex-shrink: 0;
+        }
+
+        .info-text {
+            flex: 1;
+        }
+
+        .info-title {
+            font-size: 14px;
+            font-weight: 600;
+            color: #FF6600;
+            margin-bottom: 4px;
+        }
+
+        .info-desc {
+            font-size: 13px;
+            color: #996600;
+            line-height: 1.5;
+        }
+
+        .section-title {
+            font-size: 16px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 12px;
+        }
+
+        .sport-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+            margin-bottom: 30px;
+        }
+
+        .sport-card {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+            display: flex;
+            align-items: center;
+            gap: 16px;
+        }
+
+        .sport-icon-large {
+            width: 60px;
+            height: 60px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 32px;
+            flex-shrink: 0;
+        }
+
+        .sport-info {
+            flex: 1;
+        }
+
+        .sport-name {
+            font-size: 18px;
+            font-weight: 600;
+            color: #333;
+            margin-bottom: 4px;
+        }
+
+        .sport-status {
+            font-size: 13px;
+            color: #16a34a;
+            font-weight: 500;
+        }
+
+        .sport-status.inactive {
+            color: #999;
+        }
+
+        .sport-toggle {
+            position: relative;
+            width: 50px;
+            height: 28px;
+            background: #e0e0e0;
+            border-radius: 14px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .sport-toggle.active {
+            background: #16a34a;
+        }
+
+        .sport-toggle::after {
+            content: '';
+            position: absolute;
+            top: 2px;
+            left: 2px;
+            width: 24px;
+            height: 24px;
+            background: white;
+            border-radius: 50%;
+            transition: transform 0.3s ease;
+        }
+
+        .sport-toggle.active::after {
+            transform: translateX(22px);
+        }
+
+        .available-sports {
+            background: white;
+            border-radius: 12px;
+            padding: 20px;
+            box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+        }
+
+        .available-list {
+            display: flex;
+            flex-direction: column;
+            gap: 12px;
+        }
+
+        .available-item {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            padding: 16px;
+            background: #f9f9f9;
+            border-radius: 10px;
+        }
+
+        .available-info {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .available-icon {
+            font-size: 24px;
+        }
+
+        .available-name {
+            font-size: 15px;
+            font-weight: 500;
+            color: #333;
+        }
+
+        .coming-soon {
+            font-size: 12px;
+            color: #999;
+            background: #f0f0f0;
+            padding: 4px 10px;
+            border-radius: 12px;
+        }
+    </style>
+</head>
+<body>
+<div class="header">
+    <button class="back-btn" onclick="goBack()">←</button>
+    <div class="header-title">종목 관리</div>
+</div>
+
+<div class="container">
+    <div class="info-box">
+        <div class="info-icon">💡</div>
+        <div class="info-text">
+            <div class="info-title">종목 관리 안내</div>
+            <div class="info-desc">관심있는 종목을 켜거나 끌 수 있어요. 더 많은 종목이 곧 추가될 예정입니다!</div>
+        </div>
+    </div>
+
+    <div class="section-title">내 종목</div>
+    <div class="sport-list">
+        <div class="sport-card">
+            <div class="sport-icon-large" style="background: #fff0e6;">⚾</div>
+            <div class="sport-info">
+                <div class="sport-name">야구</div>
+                <div class="sport-status">활성화됨</div>
+            </div>
+            <div class="sport-toggle active" onclick="toggleSport(this, '야구')"></div>
+        </div>
+
+        <div class="sport-card">
+            <div class="sport-icon-large" style="background: #f5f5f7;">🏅</div>
+            <div class="sport-info">
+                <div class="sport-name">기타</div>
+                <div class="sport-status inactive">비활성화됨</div>
+            </div>
+            <div class="sport-toggle" onclick="toggleSport(this, '기타')"></div>
+        </div>
+    </div>
+
+    <div class="section-title">추가 예정 종목</div>
+    <div class="available-sports">
+        <div class="available-list">
+            <div class="available-item">
+                <div class="available-info">
+                    <div class="available-icon">⚽</div>
+                    <div class="available-name">축구</div>
+                </div>
+                <div class="coming-soon">준비 중</div>
+            </div>
+            <div class="available-item">
+                <div class="available-info">
+                    <div class="available-icon">🏀</div>
+                    <div class="available-name">농구</div>
+                </div>
+                <div class="coming-soon">준비 중</div>
+            </div>
+            <div class="available-item">
+                <div class="available-info">
+                    <div class="available-icon">🏐</div>
+                    <div class="available-name">배구</div>
+                </div>
+                <div class="coming-soon">준비 중</div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+        function toggleSport(element, sportName) {
+            element.classList.toggle('active');
+            const isActive = element.classList.contains('active');
+            const card = element.closest('.sport-card');
+            const status = card.querySelector('.sport-status');
+
+            if (isActive) {
+                status.textContent = '활성화됨';
+                status.classList.remove('inactive');
+                alert(`${sportName} 종목이 활성화되었습니다!`);
+            } else {
+                status.textContent = '비활성화됨';
+                status.classList.add('inactive');
+                alert(`${sportName} 종목이 비활성화되었습니다.`);
+            }
+        }
+
+        function goBack() {
+            window.history.back();
+        }
+    </script>
+</body>
+</html>
