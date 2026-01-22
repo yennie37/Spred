@@ -10,94 +10,97 @@
     <script src="../../static/js/common.js"></script>
 </head>
 <body>
+<div class="wrap">
 <!-- ########################### [end]_헤더 : 선언부 영역 ########################### -->
 
-<!-- ########################### [start]_컨테이너 영역 : 컨텐츠 영역 ########################### -->
-<div class="container">
-    <div class="progress-bar">
-        <div class="progress-step"></div>
-        <div class="progress-step active"></div>
-        <div class="progress-step"></div>
-        <div class="progress-step"></div>
-    </div>
-
-    <div class="header">
-        <h1 class="tit-d02">반가워요!<i class="ico-greeting" aria-hidden="true"></i></h1>
-        <p>당신에 대해 알려주세요</p>
-    </div>
-
-    <form id="profileForm">
-        <div class="form-group">
-            <h2 class="form-tit" id="nickname"><span>닉네임</span></h2>
-            <label class="form-item" for="nick-form">
-                <input type="text" id="nick-form" placeholder="닉네임을 입력해주세요" maxlength="12" aria-labelledby="nickname" aria-describedby="nick-help" autocomplete="off" required>
-            </label>
-            <p id="nick-help" class="form-msg">2-12자 이내로 입력해주세요</p>
-        </div>
-
-        <div class="form-group" role="radiogroup" aria-labelledby="genderTit">
-            <h2 class="form-tit" id="genderTit">성별</h2>
-            <div class="group-wrap">
-                <label class="form-item" for="male">
-                    <span class="rd-btn-txt">남성</span>
-                    <input type="radio" name="gender" id="male" class="radio-btn" value="male">
-                </label>
-                <label class="form-item" for="female">
-                    <span class="rd-btn-txt">여성</span>
-                    <input type="radio" name="gender" id="female" class="radio-btn" value="female">
-                </label>
-                <label class="form-item" for="noGender">
-                    <span class="rd-btn-txt">선택안함</span>
-                    <input type="radio" name="gender" id="noGender" class="radio-btn" value="noGender">
-                </label>
+    <!-- ########################### [start]_컨텐츠 영역 ########################### -->
+    <div class="float-container">
+        <div class="content">
+            <div class="progress-bar">
+                <div class="progress-step"></div>
+                <div class="progress-step active"></div>
+                <div class="progress-step"></div>
+                <div class="progress-step"></div>
             </div>
-        </div>
 
-        <div class="form-group" role="radiogroup" aria-labelledby="ageGroup">
-            <h2 class="form-tit" id="ageGroup">나이대</h2>
-            <div class="group-wrap">
-                <label class="form-item" for="age10">
-                    <span class="rd-btn-txt">10대</span>
-                    <input type="radio" name="age" id="age10" class="radio-btn" value="10">
-                </label>
-                <label class="form-item" for="age20">
-                    <span class="rd-btn-txt">20대</span>
-                    <input type="radio" name="age" id="age20" class="radio-btn" value="20">
-                </label>
-                <label class="form-item" for="age30">
-                    <span class="rd-btn-txt">30대</span>
-                    <input type="radio" name="age" id="age30" class="radio-btn" value="30">
-                </label>
-                <label class="form-item" for="age40">
-                    <span class="rd-btn-txt">40대</span>
-                    <input type="radio" name="age" id="age40" class="radio-btn" value="40">
-                </label>
-                <label class="form-item" for="age50">
-                    <span class="rd-btn-txt">50대</span>
-                    <input type="radio" name="age" id="age50" class="radio-btn" value="50">
-                </label>
-                <label class="form-item" for="age60">
-                    <span class="rd-btn-txt">60대 이상</span>
-                    <input type="radio" name="age" id="age60" class="radio-btn" value="60">
-                </label>
-                <label class="form-item" for="ageNone">
-                    <span class="rd-btn-txt">선택안함</span>
-                    <input type="radio" name="age" id="ageNone" class="radio-btn" value="none">
-                </label>
+            <div class="header">
+                <h1 class="tit-d02">반가워요!<i class="ico-greeting" aria-hidden="true"></i></h1>
+                <p>당신에 대해 알려주세요</p>
             </div>
-        </div>
-    </form>
-<!-- ########################### [end]_컨테이너 영역 : 컨텐츠 영역 ########################### -->
 
-<!-- ########################### [start]_푸터 : 하단버튼 영역 ########################### -->
-    <footer class="footer">
-        <button class="btn-comm-prime" id="nextBtn" disabled>
-            <span>다음</span>
-        </button>
-    </footer>
+            <form class="form-group-wrap" id="profileForm">
+                <div class="form-group">
+                    <h2 class="form-tit" id="nickname"><span>닉네임</span></h2>
+                    <label class="form-item" for="nick-form">
+                        <input type="text" id="nick-form" placeholder="닉네임을 입력해주세요" maxlength="12" aria-labelledby="nickname" aria-describedby="nick-help" autocomplete="off" required>
+                    </label>
+                    <p id="nick-help" class="form-msg">2-12자 이내로 입력해주세요</p>
+                </div>
+
+                <div class="form-group" role="radiogroup" aria-labelledby="genderTit">
+                    <h2 class="form-tit" id="genderTit">성별</h2>
+                    <div class="group-wrap">
+                        <label class="form-item" for="male">
+                            <span class="rd-btn-txt">남성</span>
+                            <input type="radio" name="gender" id="male" class="radio-btn" value="male">
+                        </label>
+                        <label class="form-item" for="female">
+                            <span class="rd-btn-txt">여성</span>
+                            <input type="radio" name="gender" id="female" class="radio-btn" value="female">
+                        </label>
+                        <label class="form-item" for="noGender">
+                            <span class="rd-btn-txt">선택안함</span>
+                            <input type="radio" name="gender" id="noGender" class="radio-btn" value="noGender">
+                        </label>
+                    </div>
+                </div>
+
+                <div class="form-group" role="radiogroup" aria-labelledby="ageGroup">
+                    <h2 class="form-tit" id="ageGroup">나이대</h2>
+                    <div class="group-wrap">
+                        <label class="form-item" for="age10">
+                            <span class="rd-btn-txt">10대</span>
+                            <input type="radio" name="age" id="age10" class="radio-btn" value="10">
+                        </label>
+                        <label class="form-item" for="age20">
+                            <span class="rd-btn-txt">20대</span>
+                            <input type="radio" name="age" id="age20" class="radio-btn" value="20">
+                        </label>
+                        <label class="form-item" for="age30">
+                            <span class="rd-btn-txt">30대</span>
+                            <input type="radio" name="age" id="age30" class="radio-btn" value="30">
+                        </label>
+                        <label class="form-item" for="age40">
+                            <span class="rd-btn-txt">40대</span>
+                            <input type="radio" name="age" id="age40" class="radio-btn" value="40">
+                        </label>
+                        <label class="form-item" for="age50">
+                            <span class="rd-btn-txt">50대</span>
+                            <input type="radio" name="age" id="age50" class="radio-btn" value="50">
+                        </label>
+                        <label class="form-item" for="age60">
+                            <span class="rd-btn-txt">60대 이상</span>
+                            <input type="radio" name="age" id="age60" class="radio-btn" value="60">
+                        </label>
+                        <label class="form-item" for="ageNone">
+                            <span class="rd-btn-txt">선택안함</span>
+                            <input type="radio" name="age" id="ageNone" class="radio-btn" value="none">
+                        </label>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+        <!-- ########################### [start]_푸터 : 하단버튼 영역 ########################### -->
+        <footer class="footer">
+            <button class="btn-comm-prime" id="nextBtn" disabled>
+                <span>다음</span>
+            </button>
+        </footer>
+        <!-- ########################### [end]_푸터 : 하단버튼 영역 ########################### -->
+    </div>
 </div>
-<!-- ########################### [end]_푸터 : 하단버튼 영역 ########################### -->
-
+<!-- ########################### [end]_컨텐츠 영역 ########################### -->
 <script>
         let selectedGender = null;
         let selectedAge = null;

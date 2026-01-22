@@ -16,6 +16,13 @@ function layoutResize(){ // 페이지 하단 여백
 
         document.documentElement.style.setProperty('--layout-btm-height', height + 'px');
     }
+
+    let header = document.querySelector('.container > .content > .header');
+    if(header){
+        let height = header.offsetHeight;
+
+        document.documentElement.style.setProperty('--layout-header-height', height + 'px');
+    }
 }
 // ==================개별함수==================
 function modeChange(teamName){
