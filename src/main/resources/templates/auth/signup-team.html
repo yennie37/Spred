@@ -1,85 +1,124 @@
+<!-- ########################### [start]_헤더 : 선언부 영역 ########################### -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>팀 선택</title>
+    <title>종목 선택</title>
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
     <link rel="stylesheet" href="../../static/css/content.css">
+    <script src="../../static/js/common.js"></script>
 </head>
 <body>
-<div class="container">
-    <div class="progress-bar">
-        <div class="progress-step active"></div>
-        <div class="progress-step active"></div>
-        <div class="progress-step active"></div>
-        <div class="progress-step active"></div>
+<div class="wrap">
+<!-- ########################### [end]_헤더 : 선언부 영역 ########################### -->
+
+    <!-- ########################### [start]_컨텐츠 영역 ########################### -->
+    <div class="float-container">
+        <div class="content">
+            <div class="progress-bar">
+                <div class="progress-step"></div>
+                <div class="progress-step"></div>
+                <div class="progress-step"></div>
+                <div class="progress-step active"></div>
+            </div>
+
+            <div class="header">
+                <h1 class="tit-d02">우리 팀을 선택하세요<i aria-hidden="true" class="ico-baseball"></i></h1>
+                <p>응원하는 구단을 선택해주세요</p>
+            </div>
+
+            <div class="team-grid">
+                <ul>
+                    <li>
+                        <label for="hanhwa" class="team-btn">
+                            <i aria-hidden="true"></i>
+                            <input type="radio" class="team-btn" id="hanhwa" name="team" checked>
+                            <span class="team-name">한화<br>이글스</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label for="doosan" class="team-btn">
+                            <i aria-hidden="true"></i>
+                            <input type="radio" class="team-btn" id="doosan" name="team">
+                            <span class="team-name">두산<br>베어스</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label for="lg" class="team-btn">
+                            <i aria-hidden="true"></i>
+                            <input type="radio" class="team-btn" id="lg" name="team">
+                            <span class="team-name">LG<br>트윈스</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label for="kt" class="team-btn">
+                            <i aria-hidden="true"></i>
+                            <input type="radio" class="team-btn" id="kt" name="team">
+                            <span class="team-name">KT<br>위즈</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label for="ssg" class="team-btn">
+                            <i aria-hidden="true"></i>
+                            <input type="radio" class="team-btn" id="ssg" name="team">
+                            <span class="team-name">SSG<br>랜더스</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label for="nc" class="team-btn">
+                            <i aria-hidden="true"></i>
+                            <input type="radio" class="team-btn" id="nc" name="team">
+                            <span class="team-name">NC<br>다이노스</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label for="kiwoom" class="team-btn">
+                            <i aria-hidden="true"></i>
+                            <input type="radio" class="team-btn" id="kiwoom" name="team">
+                            <span class="team-name">키움<br>히어로즈</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label for="kia" class="team-btn">
+                            <i aria-hidden="true"></i>
+                            <input type="radio" class="team-btn" id="kia" name="team">
+                            <span class="team-name">KIA<br>타이거즈</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label for="lotte" class="team-btn">
+                            <i aria-hidden="true"></i>
+                            <input type="radio" class="team-btn" id="lotte" name="team">
+                            <span class="team-name">롯데<br>자이언츠</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label for="samsung" class="team-btn">
+                            <i aria-hidden="true"></i>
+                            <input type="radio" class="team-btn" id="samsung" name="team">
+                            <span class="team-name">삼성<br>라이온즈</span>
+                        </label>
+                    </li>
+                    <li>
+                        <label for="none" class="team-btn">
+                            <input type="radio" class="team-btn" id="none" name="team">
+                            <span class="team-name">없음</span>
+                        </label>
+                    </li>
+                </ul>
+            </div>
+        </div>
+        <!-- ########################### [start]_푸터 : 하단버튼 영역 ########################### -->
+        <footer class="footer">
+            <button class="btn-comm-prime" id="saveBtn" disabled>
+                <span>저장</span>
+            </button>
+        </footer>
+        <!-- ########################### [end]_푸터 : 하단버튼 영역 ########################### -->
     </div>
-
-    <div class="header">
-        <h1>우리 팀을 선택하세요 ⚾</h1>
-        <p>응원하는 구단을 선택해주세요</p>
-    </div>
-
-    <div class="team-grid">
-        <button class="team-btn" data-team="hanwha" onclick="selectTeam(this)">
-            <div class="team-icon">🦅</div>
-            <div class="team-name">한화<br>이글스</div>
-        </button>
-
-        <button class="team-btn" data-team="doosan" onclick="selectTeam(this)">
-            <div class="team-icon">🐻</div>
-            <div class="team-name">두산<br>베어스</div>
-        </button>
-
-        <button class="team-btn" data-team="lg" onclick="selectTeam(this)">
-            <div class="team-icon">🦁</div>
-            <div class="team-name">LG<br>트윈스</div>
-        </button>
-
-        <button class="team-btn" data-team="kt" onclick="selectTeam(this)">
-            <div class="team-icon">🦊</div>
-            <div class="team-name">KT<br>위즈</div>
-        </button>
-
-        <button class="team-btn" data-team="ssg" onclick="selectTeam(this)">
-            <div class="team-icon">🦁</div>
-            <div class="team-name">SSG<br>랜더스</div>
-        </button>
-
-        <button class="team-btn" data-team="nc" onclick="selectTeam(this)">
-            <div class="team-icon">🦅</div>
-            <div class="team-name">NC<br>다이노스</div>
-        </button>
-
-        <button class="team-btn" data-team="kiwoom" onclick="selectTeam(this)">
-            <div class="team-icon">🐻</div>
-            <div class="team-name">키움<br>히어로즈</div>
-        </button>
-
-        <button class="team-btn" data-team="kia" onclick="selectTeam(this)">
-            <div class="team-icon">🐯</div>
-            <div class="team-name">KIA<br>타이거즈</div>
-        </button>
-
-        <button class="team-btn" data-team="lotte" onclick="selectTeam(this)">
-            <div class="team-icon">🦭</div>
-            <div class="team-name">롯데<br>자이언츠</div>
-        </button>
-
-        <button class="team-btn" data-team="samsung" onclick="selectTeam(this)">
-            <div class="team-icon">🦁</div>
-            <div class="team-name">삼성<br>라이온즈</div>
-        </button>
-
-        <button class="team-btn" data-team="none" onclick="selectTeam(this)" style="grid-column: 1 / -1;">
-            <div class="team-icon">⚪</div>
-            <div class="team-name">없음</div>
-        </button>
-    </div>
-
-    <button class="save-btn" id="saveBtn" disabled>저장</button>
 </div>
+<!-- ########################### [end]_컨텐츠 영역 ########################### -->
 
 <script>
         let selectedTeam = null;

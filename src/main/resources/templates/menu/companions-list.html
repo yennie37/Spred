@@ -1,0 +1,154 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>일행 관리</title>
+</head>
+<body>
+<div class="container">
+    <div class="header">
+        <h1>일행 관리 👥</h1>
+        <p>자주 함께하는 사람들을 등록하세요</p>
+    </div>
+
+    <div class="stats-row">
+        <div class="stat-card">
+            <div class="stat-label">등록된 일행</div>
+            <div class="stat-value">4명</div>
+        </div>
+        <div class="stat-card">
+            <div class="stat-label">즐겨찾기</div>
+            <div class="stat-value">2명</div>
+        </div>
+    </div>
+
+    <button class="add-btn" onclick="openAddModal()">+ 새 일행 추가하기</button>
+
+    <div class="companion-list" id="companionList">
+        <div class="companion-card favorite">
+            <div class="companion-avatar">유</div>
+            <div class="companion-info">
+                <div class="companion-name">
+                    유지인 <span class="relation-tag">친구</span>
+                </div>
+                <div class="companion-stats">⚾ 함께한 직관 12회</div>
+            </div>
+            <div class="companion-actions">
+                <button class="action-btn favorite active" onclick="toggleFavorite(this)">⭐</button>
+                <button class="action-btn edit" onclick="editCompanion('유지인')">✏️</button>
+                <button class="action-btn delete" onclick="deleteCompanion('유지인')">🗑️</button>
+            </div>
+        </div>
+
+        <div class="companion-card favorite">
+            <div class="companion-avatar">오</div>
+            <div class="companion-info">
+                <div class="companion-name">
+                    오은진 <span class="relation-tag">가족</span>
+                </div>
+                <div class="companion-stats">⚾ 함께한 직관 8회</div>
+            </div>
+            <div class="companion-actions">
+                <button class="action-btn favorite active" onclick="toggleFavorite(this)">⭐</button>
+                <button class="action-btn edit" onclick="editCompanion('오은진')">✏️</button>
+                <button class="action-btn delete" onclick="deleteCompanion('오은진')">🗑️</button>
+            </div>
+        </div>
+
+        <div class="companion-card">
+            <div class="companion-avatar">최</div>
+            <div class="companion-info">
+                <div class="companion-name">
+                    최미현 <span class="relation-tag">동호회</span>
+                </div>
+                <div class="companion-stats">⚾ 함께한 직관 5회</div>
+            </div>
+            <div class="companion-actions">
+                <button class="action-btn favorite" onclick="toggleFavorite(this)">⭐</button>
+                <button class="action-btn edit" onclick="editCompanion('최미현')">✏️</button>
+                <button class="action-btn delete" onclick="deleteCompanion('최미현')">🗑️</button>
+            </div>
+        </div>
+
+        <div class="companion-card">
+            <div class="companion-avatar">김</div>
+            <div class="companion-info">
+                <div class="companion-name">
+                    김지희 <span class="relation-tag">지인</span>
+                </div>
+                <div class="companion-stats">⚾ 함께한 직관 3회</div>
+            </div>
+            <div class="companion-actions">
+                <button class="action-btn favorite" onclick="toggleFavorite(this)">⭐</button>
+                <button class="action-btn edit" onclick="editCompanion('김지희')">✏️</button>
+                <button class="action-btn delete" onclick="deleteCompanion('김지희')">🗑️</button>
+            </div>
+        </div>
+    </div>
+
+    <div class="back-link">
+        <a href="#" onclick="goBack(event)">← 돌아가기</a>
+    </div>
+</div>
+
+<div class="modal-overlay" id="addModal">
+    <div class="modal">
+        <div class="modal-header">일행 추가하기</div>
+        <form id="addForm">
+            <div class="form-group">
+                <label class="form-label">이름 / 닉네임 <span class="required">*</span></label>
+                <input type="text" class="form-input" placeholder="예: 유지인" required>
+            </div>
+            <div class="form-group">
+                <label class="form-label">관계 <span class="required">*</span></label>
+                <select class="form-input" required>
+                    <option value="" disabled selected>관계를 선택하세요</option>
+                    <option value="친구">친구</option>
+                    <option value="가족">가족</option>
+                    <option value="동호회">동호회</option>
+                    <option value="지인">지인</option>
+                    <option value="기타">기타</option>
+                </select>
+            </div>
+            <div class="modal-actions">
+                <button type="button" class="modal-btn cancel" onclick="closeAddModal()">취소</button>
+                <button type="submit" class="modal-btn submit">추가</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<script>
+    function goBack(e) { e.preventDefault(); window.history.back(); }
+    function openAddModal() { document.getElementById('addModal').classList.add('show'); }
+    function closeAddModal() {
+        document.getElementById('addModal').classList.remove('show');
+        document.getElementById('addForm').reset();
+    }
+
+    function toggleFavorite(btn) {
+        btn.classList.toggle('active');
+        const card = btn.closest('.companion-card');
+        card.classList.toggle('favorite', btn.classList.contains('active'));
+    }
+
+    function editCompanion(name) { alert(`${name} 정보 수정 기능 (구현 예정)`); }
+    function deleteCompanion(name) {
+        if (confirm(`${name}님을 일행 목록에서 삭제하시겠습니까?`)) {
+            alert(`${name}님이 삭제되었습니다.`);
+        }
+    }
+
+    document.getElementById('addForm').addEventListener('submit', function(e) {
+        e.preventDefault();
+        alert('일행이 추가되었습니다! 🎉');
+        closeAddModal();
+    });
+
+    document.getElementById('addModal').addEventListener('click', function(e) {
+        if (e.target === this) closeAddModal();
+    });
+</script>
+</body>
+</html>
