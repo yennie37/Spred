@@ -1,231 +1,235 @@
+<!-- ########################### [start]_헤더 : 선언부 영역 ########################### -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>기록 추가하기</title>
+    <title>기록추가하기</title>
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
     <link rel="stylesheet" href="../../static/css/content.css">
+    <script src="../../static/js/common.js"></script>
 </head>
 <body>
-<div class="header">
-    <button class="back-btn" onclick="goBack()">←</button>
-    <div class="header-title">직관기록 추가하기</div>
+<div class="wrap">
+<!-- ########################### [end]_헤더 : 선언부 영역 ########################### -->
+
+<!-- ########################### [start]_컨텐츠 영역 ########################### -->
+    <div class="container">
+        <div class="content">
+            <div class="header">
+                <div class="left">
+                    <button type="button" class="arrow-btn" title="이전 화면 이동하기"></button>
+                    <h1><em>기록해연</em> 님의 응원 기록</h1>
+                </div>
+            </div>
+            <h2 class="tit-d03">기본 정보</h2>
+            <div class="form-group-wrap">
+                <div class="form-group" role="radiogroup" aria-labelledby="matchType">
+                    <h3 class="form-tit" id="matchType"><span>경기 종류</span></h3>
+                    <div class="group-wrap">
+                        <label class="form-item" for="preSeason">
+                            <span class="rd-btn-txt">시범</span>
+                            <input type="radio" name="plays" id="preSeason" class="radio-btn" value="preSeason" required>
+                        </label>
+                        <label class="form-item" for="regularSeason">
+                            <span class="rd-btn-txt">정규</span>
+                            <input type="radio" name="plays" id="regularSeason" class="radio-btn" value="regularSeason" required>
+                        </label>
+                        <label class="form-item" for="playOffs">
+                            <span class="rd-btn-txt">포스트</span>
+                            <input type="radio" name="plays" id="playOffs" class="radio-btn" value="playOffs" required>
+                        </label>
+                        <label class="form-item" for="otherPlay">
+                            <span class="rd-btn-txt">기타</span>
+                            <input type="radio" name="plays" id="otherPlay" class="radio-btn" value="otherPlay" required>
+                        </label>
+                    </div>
+                </div>
+                <!-- // -->
+                <div class="form-group" role="radiogroup" aria-labelledby="selectDate">
+                    <h3 class="form-tit" id="selectDate"><span>날짜</span></h3>
+                    <div class="group-wrap">
+                        <button type="button" id="showDate" class="data-input-box" aria-haspopup="dialog" aria-expanded="false" onclick="openModal('bottomSheet01');"><span id="displayDate">날짜 선택</span></button>
+                    </div>
+                </div>
+                <!-- // -->
+                <div class="form-group" role="radiogroup" aria-labelledby="selectTime">
+                    <h3 class="form-tit" id="selectTime"><span>시간</span></h3>
+                    <div class="group-wrap">
+                        <button type="button" id="showTime" class="data-input-box" aria-haspopup="dialog" aria-expanded="false"><span id="displayTime">시간 선택</span></button>
+                    </div>
+                </div>
+                <!-- // -->
+            </div>
+        </div>
+        <!-- ########################### [start]_푸터 : 하단버튼 영역 ########################### -->
+        <footer class="footer">
+            <div class="wrap-btn">
+                <button type="button" class="btn-comm-prime"><span>저장하기</span></button>
+            </div>
+        </footer>
+        <!-- ########################### [end]_푸터 : 하단버튼 영역 ########################### -->
+    </div>
 </div>
+<!-- ########################### [end]_컨텐츠 영역 ########################### -->
 
-<div class="container">
-    <form id="recordForm">
-        <!-- 기본 정보 -->
-        <div class="form-section">
-            <div class="section-title">📋 기본 정보</div>
-
-            <div class="form-group">
-                <label class="form-label">경기 종류 <span class="required">*</span></label>
-                <div class="button-group">
-                    <button type="button" class="option-btn" data-value="exhibition">시범</button>
-                    <button type="button" class="option-btn selected" data-value="regular">정규</button>
-                    <button type="button" class="option-btn" data-value="post">포스트</button>
-                    <button type="button" class="option-btn" data-value="other">기타</button>
+<!-- ########################### [start]_모달 영역 ########################### -->
+<div class="modal btm-sheet" id="bottomSheet01">
+    <div class="modal-container">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-tit">경기 시즌</h6>
+                <button type="button" class="close-md" title="모달 닫기" onclick="dismissModal('bottomSheet01');"></button>
+            </div>
+            <div class="modal-content">
+                <div class="calendar-wrap">
+                    <div class="calender-head">
+                        <button class="nav-btn" id="prevMonth" aria-label="이전 달 이동"></button>
+                        <h7 class="month-tit" id="calendarTit" aria-live="polite">2026년 01월 28일</h7>
+                        <button class="nav-btn" id="nextMonth" aria-label="다음 달 이동"></button>
+                    </div>
+                    <table class="data-table" role="grid">
+                        <caption class="hide">월간 달력</caption>
+                        <thead>
+                            <tr>
+                                <th scope="col" aria-label="일요일">일</th>
+                                <th scope="col" aria-label="월요일">월</th>
+                                <th scope="col" aria-label="화요일">화</th>
+                                <th scope="col" aria-label="수요일">수</th>
+                                <th scope="col" aria-label="목요일">목</th>
+                                <th scope="col" aria-label="금요일">금</th>
+                                <th scope="col" aria-label="토요일">토</th>
+                            </tr>
+                        </thead>
+                        <tbody id="calendarBody"></tbody>
+                    </table>
                 </div>
             </div>
-
-            <div class="form-group">
-                <label class="form-label">날짜 <span class="required">*</span></label>
-                <input type="date" class="form-input" value="2025-04-05" required>
-            </div>
-
-            <div class="form-group">
-                <label class="form-label">시간 <span class="required">*</span></label>
-                <input type="time" class="form-input" value="18:30" required>
-            </div>
-
-            <div class="form-group">
-                <label class="form-label">기분 <span class="required">*</span></label>
-                <div class="mood-buttons">
-                    <button type="button" class="mood-btn">
-                        🤩
-                        <span>극희</span>
-                    </button>
-                    <button type="button" class="mood-btn selected">
-                        😊
-                        <span>희</span>
-                    </button>
-                    <button type="button" class="mood-btn">
-                        😐
-                        <span>중</span>
-                    </button>
-                    <button type="button" class="mood-btn">
-                        😟
-                        <span>소노</span>
-                    </button>
-                    <button type="button" class="mood-btn">
-                        😡
-                        <span>중노</span>
-                    </button>
-                    <button type="button" class="mood-btn">
-                        🤬
-                        <span>극대노</span>
-                    </button>
+            <div class="modal-footer">
+                <div class="btn-wrap">
+                    <button class="btn-comm-prime" id="confirmBtn" onclick="dismissModal('bottomSheet01');"><span>선택 완료</span></button>
                 </div>
             </div>
         </div>
-
-        <!-- 경기 정보 -->
-        <div class="form-section">
-            <div class="section-title">⚾ 경기 정보</div>
-
-            <div class="form-group">
-                <label class="form-label">구장 <span class="required">*</span></label>
-                <select class="form-select" required>
-                    <option value="">구장을 선택하세요</option>
-                    <option value="daejeon" selected>대전 한화생명 이글스파크</option>
-                    <option value="jamsil">서울 잠실야구장</option>
-                    <option value="gocheok">서울 고척스카이돔</option>
-                    <option value="suwon">수원 KT위즈파크</option>
-                    <option value="incheon">인천 SSG랜더스필드</option>
-                    <option value="changwon">창원 NC파크</option>
-                    <option value="gwangju">광주 기아챔피언스필드</option>
-                    <option value="busan">부산 사직야구장</option>
-                    <option value="daegu">대구 삼성라이온즈파크</option>
-                    <option value="other">기타 (직접입력)</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label class="form-label">홈/원정 <span class="required">*</span></label>
-                <div class="button-group">
-                    <button type="button" class="option-btn selected" data-value="home">홈</button>
-                    <button type="button" class="option-btn" data-value="away">원정</button>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="form-label">상대팀 <span class="required">*</span></label>
-                <select class="form-select" required>
-                    <option value="">상대팀을 선택하세요</option>
-                    <option value="doosan">두산 베어스</option>
-                    <option value="lg">LG 트윈스</option>
-                    <option value="kt">KT 위즈</option>
-                    <option value="ssg">SSG 랜더스</option>
-                    <option value="nc">NC 다이노스</option>
-                    <option value="kiwoom">키움 히어로즈</option>
-                    <option value="kia">KIA 타이거즈</option>
-                    <option value="lotte">롯데 자이언츠</option>
-                    <option value="samsung" selected>삼성 라이온즈</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label class="form-label">점수 <span class="required">*</span></label>
-                <div class="score-input-group">
-                    <input type="number" class="form-input score-input" placeholder="우리팀" value="5" min="0" required>
-                    <span class="vs-text">:</span>
-                    <input type="number" class="form-input score-input" placeholder="상대팀" value="3" min="0" required>
-                </div>
-            </div>
-
-            <div class="form-group">
-                <label class="form-label">경기 결과 <span class="required">*</span></label>
-                <div class="button-group">
-                    <button type="button" class="option-btn selected" data-value="win">승</button>
-                    <button type="button" class="option-btn" data-value="lose">패</button>
-                    <button type="button" class="option-btn" data-value="draw">무</button>
-                </div>
-            </div>
-        </div>
-
-        <!-- 좌석 정보 -->
-        <div class="form-section">
-            <div class="section-title">🎫 좌석 정보</div>
-
-            <div class="form-group">
-                <label class="form-label">좌석 종류 <span class="required">*</span></label>
-                <select class="form-select" required>
-                    <option value="">좌석을 선택하세요</option>
-                    <option value="1st-base" selected>1루 내야지정석</option>
-                    <option value="3rd-base">3루 내야지정석</option>
-                    <option value="outfield-free">외야자유석</option>
-                    <option value="table">테이블석</option>
-                    <option value="vip">VIP석</option>
-                    <option value="sky">스카이박스</option>
-                </select>
-            </div>
-
-            <div class="form-group">
-                <label class="form-label">좌석 위치</label>
-                <input type="text" class="form-input" placeholder="예: 105블럭 13열 09" value="105블럭 13열 09">
-                <div class="helper-text">구역, 열, 번호 등을 자유롭게 입력하세요</div>
-            </div>
-
-            <div class="form-group">
-                <label class="form-label">좌석 메모</label>
-                <textarea class="form-textarea" placeholder="좌석에 대한 메모를 남겨보세요"></textarea>
-            </div>
-        </div>
-
-        <!-- 추가 정보 -->
-        <div class="form-section">
-            <div class="section-title">📝 추가 정보</div>
-
-            <div class="form-group">
-                <label class="form-label">사진 첨부</label>
-                <div class="photo-upload" onclick="document.getElementById('photoInput').click()">
-                    <div class="photo-upload-icon">📸</div>
-                    <div class="photo-upload-text">사진을 추가해보세요</div>
-                    <div class="helper-text">여러 장 선택 가능</div>
-                </div>
-                <input type="file" id="photoInput" accept="image/*" multiple style="display: none;">
-            </div>
-
-            <div class="form-group">
-                <label class="form-label">일행</label>
-                <select class="form-select" multiple>
-                    <option value="ryujiin" selected>유지인</option>
-                    <option value="oheunjin" selected>오은진</option>
-                    <option value="choimihyeon">최미현</option>
-                    <option value="kimjihee">김지희</option>
-                </select>
-                <div class="helper-text">Ctrl/Cmd 키를 누르고 여러 명 선택 가능</div>
-            </div>
-
-            <div class="form-group">
-                <label class="form-label">자유 메모</label>
-                <textarea class="form-textarea" placeholder="이날의 특별한 순간을 기록해보세요"></textarea>
-            </div>
-        </div>
-
-        <button type="submit" class="submit-btn">저장하기</button>
-    </form>
+    </div>
 </div>
-
 <script>
-        // 옵션 버튼 토글
-        document.querySelectorAll('.option-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                const group = this.closest('.button-group');
-                group.querySelectorAll('.option-btn').forEach(b => b.classList.remove('selected'));
-                this.classList.add('selected');
-            });
-        });
+    // --- [변수 선언] ---
+    const showDateBtn = document.getElementById('showDate'); // 트리거 버튼
+    const displayDateSpan = document.getElementById('displayDate'); // 날짜 표시될 텍스트
+    const bottomSheet = document.getElementById('bottomSheet01'); // 모달
 
-        // 기분 버튼 토글
-        document.querySelectorAll('.mood-btn').forEach(btn => {
-            btn.addEventListener('click', function() {
-                document.querySelectorAll('.mood-btn').forEach(b => b.classList.remove('selected'));
-                this.classList.add('selected');
-            });
-        });
+    // 달력 내부 요소
+    const calendarBody = document.getElementById('calendarBody');
+    const calendarTit = document.getElementById('calendarTit');
+    const prevBtn = document.getElementById('prevMonth');
+    const nextBtn = document.getElementById('nextMonth');
+    const confirmBtn = document.getElementById('confirmBtn');
+    const closeModalBtn = document.getElementById('closeModalBtn');
 
-        // 폼 제출
-        document.getElementById('recordForm').addEventListener('submit', function(e) {
-            e.preventDefault();
-            alert('직관기록이 저장되었습니다! 🎉');
-            window.location.href = 'record-list.html';
-        });
+    // 상태 변수
+    let currentDate = new Date();
+    let selectedDate = new Date();
 
-        function goBack() {
-            window.history.back();
+    // --- [달력 렌더링 함수] (이전과 동일) ---
+    function renderCalendar() {
+        const year = currentDate.getFullYear();
+        const month = currentDate.getMonth();
+
+        calendarTit.textContent = `${year}년 ${String(month + 1).padStart(2, '0')}월`;
+
+        const firstDay = new Date(year, month, 1).getDay();
+        const lastDate = new Date(year, month + 1, 0).getDate();
+
+        let html = '';
+        let dayCount = 1;
+        let isMonthEnded = false;
+
+        for (let i = 0; i < 6; i++) {
+            if (isMonthEnded && i > 0) break;
+            let rowHtml = '<tr>';
+            for (let j = 0; j < 7; j++) {
+                if ((i === 0 && j < firstDay) || dayCount > lastDate) {
+                    rowHtml += '<td></td>';
+                    if (dayCount > lastDate) isMonthEnded = true;
+                } else {
+                    const isToday = isSameDay(new Date(year, month, dayCount), new Date());
+                    const isSelected = isSameDay(new Date(year, month, dayCount), selectedDate);
+
+                    rowHtml += `<td><button type="button" class="date-btn ${isToday ? 'today' : ''}" aria-selected="${isSelected ? 'true' : 'false'}" data-day="${dayCount}" aria-label="${year}년 ${month + 1}월 ${dayCount}일">${dayCount}</button></td>`;
+                    dayCount++;
+                }
+            }
+            rowHtml += '</tr>';
+            if (!isMonthEnded || (isMonthEnded && rowHtml.includes('date-btn'))) {
+                html += rowHtml;
+            }
         }
-    </script>
+        calendarBody.innerHTML = html;
+        addDateClickEvents();
+    }
+
+    function isSameDay(d1, d2) {
+        return d1.getFullYear() === d2.getFullYear() && d1.getMonth() === d2.getMonth() && d1.getDate() === d2.getDate();
+    }
+
+    function addDateClickEvents() {
+        const buttons = calendarBody.querySelectorAll('.date-btn');
+        buttons.forEach(btn => {
+            btn.addEventListener('click', (e) => {
+                const day = parseInt(e.target.dataset.day);
+                selectedDate = new Date(currentDate.getFullYear(), currentDate.getMonth(), day);
+                renderCalendar();
+            });
+        });
+    }
+
+    // --- [이벤트 핸들러 수정 부분] ---
+
+    // 1. 모달 열기 (트리거 버튼 클릭)
+    showDateBtn.addEventListener('click', () => {
+
+
+        // 열릴 때, 현재 선택된 날짜가 있는 달을 보여줌
+        currentDate = new Date(selectedDate.getFullYear(), selectedDate.getMonth(), 1);
+        renderCalendar();
+    });
+
+    // 2. 모달 닫기 공통 함수
+    // function closeSheet() {
+    //     bottomSheet.classList.remove('show');
+    //     showDateBtn.setAttribute('aria-expanded', 'false'); // 접근성: 닫힘 상태 명시
+    //     showDateBtn.focus(); // 접근성: 초점을 다시 트리거 버튼으로 이동
+    // }
+
+    // 3. [핵심] 선택 완료 버튼 클릭 시 텍스트 변경
+    confirmBtn.addEventListener('click', () => {
+        const y = selectedDate.getFullYear();
+        const m = String(selectedDate.getMonth() + 1).padStart(2, '0');
+        const d = String(selectedDate.getDate()).padStart(2, '0');
+
+        // 화면의 span 텍스트 업데이트 (예: 2024.05.20)
+        displayDateSpan.textContent = `${y}.${m}.${d}`;
+
+        // (옵션) 값이 입력되었음을 시각적으로 표시하기 위해 클래스 추가
+        showDateBtn.classList.add('is-value');
+    });
+
+    // 4. 기타 닫기/이동 버튼
+    if(closeModalBtn) closeModalBtn.addEventListener('click', closeSheet);
+
+    prevBtn.addEventListener('click', () => {
+        currentDate.setMonth(currentDate.getMonth() - 1);
+        renderCalendar();
+    });
+
+    nextBtn.addEventListener('click', () => {
+        currentDate.setMonth(currentDate.getMonth() + 1);
+        renderCalendar();
+    });
+
+    // 초기화
+    renderCalendar();
+</script>
 </body>
 </html>

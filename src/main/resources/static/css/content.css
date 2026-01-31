@@ -18,24 +18,9 @@
 .ico-lotte{background:url(./../images/icon/team/icon_lotte.svg);}
 .ico-samsung{background:url(./../images/icon/team/icon_samsung.svg);}
 
-/* *********************** Header *********************** */
-[class^=tit-d0]{display:-webkit-flex;display:flex;justify-content:center;align-items:center;gap:8px;color:var(--replace-333333);margin-bottom:12px;font-weight:700;}
-[class^=tit-d0] > [class^=ico-]{display:block;width:24px;height:24px;background-position:center;background-size:contain;background-repeat:no-repeat}
-.logo{display:block;width:100%;font:700 2.8rem/2.8rem "Pretendard Variable";font-style:italic;background:linear-gradient(135deg, #667eea 0%, #764ba2 100%);-webkit-background-clip:text;background-clip:text;color:transparent;}
-.logo + p{margin-top:8px;}
-.tit-d01{font:700 3.2rem/3.2rem "Pretendard Variable";}
-.tit-d02{font-size:2.4rem;}
-.float-container .header{margin-bottom:36px;padding-top:6px;text-align:center;}
-.float-container .header p{color:var(--replace-666666);font:400 1.5rem/2.25rem "Pretendard Variable";}
-.float-container .header.center{text-align:center;margin-bottom:40px;}
-.progress-bar + .header {padding:0;}
-.container > .content > .header{position:fixed;top:0;display:-webkit-flex;display:flex;justify-content:space-between;align-items:center;padding:28px 20px;width:100%;background-color:#fff;box-shadow:var(--boxshadow-sm);z-index:1}
-.container > .content > .header > h1{font:700 1.8rem/1.8rem "Pretendard Variable";color:var(--replace-333333);}
-.container > .content > .header > h1 > em{color:var(--font-color-prime);}
-.container > .content > .header .menu-btn{display:block;width:23px;height:29px;background:url("./../images/icon/mono/icon_hamburger.svg") center/contain no-repeat;border:none;}
-
 /* *********************** content *********************** */
 .divider{display:block;width:100%;height:2px;margin:16px 0;background-color:var(--replace-e0e0e0);}
+
 .steps{width:100%;}
 .step-card{display:-webkit-flex;display:flex;flex-direction:column;gap:16px;width:100%;height:fit-content;}
 .step-card .step-content{display:-webkit-flex;display:flex;justify-content:flex-start;align-items:center;width:100%;padding:24px 16px;min-height:115px;border:2px solid var(--border-color-prime);border-radius:16px;}
@@ -93,7 +78,9 @@
 .msg-box i{display:block;width:1.3rem;height:1.3rem;}
 .msg-box dl{display:-webkit-flex;display:flex;justify-content:flex-start;align-items:center;width:100%;}
 .msg-box dl dt,
-.msg-box dl dd{font:400 1.3rem/1.3rem "Pretendard Variable";color:var(--font-color-prime);word-break:keep-all;}
+.msg-box dl dd{position:relative;font:400 1.3rem/1.3rem "Pretendard Variable";color:var(--font-color-prime);word-break:break-all;}
+.msg-box dl dt{padding-right:6px;white-space:nowrap;}
+.msg-box dl dt:after{content:':';display:block;width:2px;height:100%;position:absolute;right:3px;top:0;}
 .msg-box i + dl{margin-left:4px;}
 
 /* *********************** button *********************** */
@@ -136,7 +123,9 @@
 .form-group > .form-item{display:block;width:100%;padding:11px 16px 9px;}
 .form-group > .form-tit{margin-bottom:10px;}
 .form-group > .form-tit > span{position:relative;}
-.form-group > .form-tit:has(+ .form-item input[required]) > span:after{content:'';position:absolute;right:-0.8rem;top:0.3rem;width:0.5rem;height:0.5rem;background-color:var(--point-red);border-radius:100%}
+.form-group > .form-tit:has(+ .form-item input[required]) > span:after,
+.form-group > .form-tit:has(+ .group-wrap .form-item input[required]) > span:after
+{content:'';position:absolute;right:-0.8rem;top:0.3rem;width:0.5rem;height:0.5rem;background-color:var(--point-red);border-radius:100%}
 .form-group .form-item > input[type="text"]{display:block;width:100%;height:100%;color:var(--replace-666666);font:400 1.5rem/1.8rem "Pretendard Variable";}
 .form-group .form-item > input[type="text"]::placeholder{color:var(--replace-757575);}
 .form-group > .group-wrap{display:-webkit-flex;display:flex;flex-wrap:wrap;gap:8px;justify-content:space-between;width:100%;}
@@ -158,6 +147,8 @@
 .form-group .radio-btn label > .txt-wrap .desc{font:400 1.3rem/1.7rem "Pretendard Variable";color:var(--replace-999999);}
 .form-group .radio-btn label > .txt-wrap .tit + .desc{margin-top:4px;}
 .form-group .radio-btn label:has(input[type="radio"]:checked) > .txt-wrap span{color:#fff;}
+.form-group > .group-wrap .data-input-box{padding:15px 0 13px;width:100%;border:2px solid var(--replace-e0e0e0);border-radius:10px;}
+.form-group > .group-wrap .data-input-box span{color:var(--replace-757575);font:400 1.5rem/1.8rem "Pretendard Variable";}
 
 .progress-bar{position:relative;display:-webkit-flex;display:flex;justify-content:space-between;align-items:center;gap:8px;margin-bottom:36px;width:12rem;height:4px;}
 .progress-bar .progress-step{display:block;width:calc(100% / 4);height:100%;background-color:var(--bg-color-prime);border-radius:2px;}
@@ -239,15 +230,15 @@
 .modal-tit + .close-md{display:block;padding:4px;width:18px;height:18px;background-color:transparent;background-image:url("./../images/icon/mono/icon_close.svg");background-repeat:no-repeat;background-size:contain;border:none;}
 
 /* *********************** side menu *********************** */
-.side-menu{display:none;position:fixed;left:0;top:0;right:0;width:100%;height:100%;background-color:rgba(0,0,0,0.6);z-index:100;}
+.side-menu{display:none;position:fixed;left:0;top:0;right:0;width:100%;height:100%;background-color:rgba(0,0,0,0.6);z-index:1300;}
 .side-menu.show{display:block;animation:showDim 0.5s ease-out forwards;}
 @keyframes showDim{
     from{opacity:0;}
     to{opacity:1;}
 }
 .side-menu .menu-wrap{position:absolute;top:0;right:0;bottom:0;width:80vw;background-color:#fff;}
-.side-menu.show .menu-wrap{transform:translateY(0);opacity:1;animation:slideUp 0.3s ease-out forwards;}
-@keyframes slideUp{
+.side-menu.show .menu-wrap{transform:translateY(0);opacity:1;animation:slideLtoR 0.3s ease-out forwards;}
+@keyframes slideLtoR{
     from{
         transform:translateX(100%);
         opacity:0;
@@ -273,3 +264,25 @@
 .side-menu .menu-wrap .menu-content .menu-body ul li a > span{margin-left:4px;font:500 1.5rem/1.5rem "Pretendard Variable";}
 .side-menu .menu-wrap .menu-content .menu-body ul li button{padding:16px 0;}
 .side-menu .menu-wrap .menu-content .menu-body ul li button > span{font:500 1.5rem/1.5rem "Pretendard Variable";color:var(--point-red);}
+
+.calendar-wrap{position:relative;display:block;width:100%;height:100%;}
+.calendar-wrap .calender-head{display:-webkit-flex;display:flex;width:100%;justify-content:space-between;align-items:center;padding:10px 20px;margin-bottom:30px;}
+.calendar-wrap .calender-head .nav-btn{display:block;width:30px;height:30px;background-size:contain;background-position:center;background-repeat:no-repeat;}
+.calendar-wrap .calender-head .nav-btn:first-of-type{background-image:url("./../images/icon/mono/icon_expand_left.svg");}
+.calendar-wrap .calender-head .nav-btn:last-of-type{background-image:url("./../images/icon/mono/icon_expand_right.svg");}
+.calendar-wrap .calender-head .month-tit{font:700 1.8rem/1.8rem "Pretendard Variable";}
+.calendar-wrap .data-table{width:100%;border-collapse:collapse;table-layout:fixed;}
+.calendar-wrap .data-table thead{width:100%;}
+.calendar-wrap .data-table thead th{padding:7px 0;width:100%;text-align:center;font:500 1.4rem/1.4rem "Pretendard Variable";color:var(--replace-000000);}
+.calendar-wrap .data-table thead th:first-of-type{color:var(--point-red);}
+.calendar-wrap .data-table thead th:last-of-type{color:var(--point-blue);}
+.calendar-wrap .data-table thead tr{width:100%;}
+.calendar-wrap .data-table thead tr th{}
+.calendar-wrap .data-table tbody{position:relative;width:100%;}
+.calendar-wrap .data-table tbody tr{}
+.calendar-wrap .data-table tbody tr td{width:44px;height:44px;text-align:center;vertical-align:middle}
+.calendar-wrap .data-table tbody tr td > .date-btn{width:100%;height:100%;}
+.calendar-wrap .data-table tbody tr td > .date-btn.today{position:relative;border-radius:100%;color:var(--point-blue);}
+.calendar-wrap .data-table tbody tr td > .date-btn.today:after{content:'오늘';position:absolute;left:0;right:0;bottom:-0.1rem;font:400 1.2rem/1.2rem "Pretendard Variable";}
+.calendar-wrap .data-table tbody tr td > .date-btn[aria-selected="true"]{color:#fff;background-size:36px;background-color:var(--point-blue);border-radius:100%;}
+.calendar-wrap .data-table tbody tr td > .date-btn[aria-selected="true"]:after{display:none;}
