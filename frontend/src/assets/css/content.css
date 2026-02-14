@@ -286,3 +286,11 @@
 .calendar-wrap .data-table tbody tr td > .date-btn.today:after{content:'오늘';position:absolute;left:0;right:0;bottom:-0.1rem;font:400 1.2rem/1.2rem "Pretendard Variable";}
 .calendar-wrap .data-table tbody tr td > .date-btn[aria-selected="true"]{color:#fff;background-size:36px;background-color:var(--point-blue);border-radius:100%;}
 .calendar-wrap .data-table tbody tr td > .date-btn[aria-selected="true"]:after{display:none;}
+
+.picker-group{display:-webkit-flex;display:flex;justify-content:center;align-items:center;height:20rem;}
+.picker-group .wheel-wrapper{}
+.picker-group .wheel-wrapper .wheel-scroll{}
+.picker-group .colon{}
+.picker-group .colon + .wheel-wrapper{}
+.picker-group .colon + .wheel-wrapper .wheel-scroll{}
+.picker-group .colon + .wheel-wrapper .picker-mask{}
