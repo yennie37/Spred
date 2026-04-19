@@ -1,353 +1,404 @@
+<!-- ########################### [start]_헤더 : 선언부 영역 ########################### -->
 <!DOCTYPE html>
 <html lang="ko">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>직관기록</title>
+    <title>기록통계</title>
     <link rel="stylesheet" as="style" crossorigin href="https://cdn.jsdelivr.net/gh/orioncactus/pretendard@v1.3.9/dist/web/static/pretendard.min.css" />
     <link rel="stylesheet" href="../../static/css/content.css">
+    <script src="../../static/js/common.js"></script>
 </head>
 <body>
-<div class="header">
-    <div class="header-title">직관기록 ⚾</div>
-</div>
+<div class="wrap">
+<!-- ########################### [end]_헤더 : 선언부 영역 ########################### -->
 
-<div class="container">
-    <div class="season-stats">
-        <div class="season-select">
-            <select id="seasonSelect" onchange="changeSeason()">
-                <option value="2025">2025 시즌</option>
-                <option value="2026">2026 시즌</option>
-                <option value="2027">2027 시즌</option>
-            </select>
-        </div>
-        <div class="quick-stats">
-            <div class="quick-stat">
-                <div class="quick-stat-label">총 관람</div>
-                <div class="quick-stat-value">44회</div>
+<!-- ########################### [start]_컨텐츠 영역 ########################### -->
+    <div class="container">
+        <div class="content">
+            <div class="header">
+                <div class="left">
+                    <h1><em>기록해연</em> 님의 응원 기록</h1>
+                </div>
+                <button type="button" class="menu-btn" title="사이드 메뉴 열기"></button>
             </div>
-            <div class="quick-stat">
-                <div class="quick-stat-label">승률</div>
-                <div class="quick-stat-value">59%</div>
-            </div>
-            <div class="quick-stat">
-                <div class="quick-stat-label">총 지출</div>
-                <div class="quick-stat-value">1.3M</div>
-            </div>
-        </div>
-    </div>
-
-    <div class="filter-tabs">
-        <button class="filter-tab active">전체</button>
-        <button class="filter-tab">정규시즌</button>
-        <button class="filter-tab">포스트시즌</button>
-        <button class="filter-tab">시범경기</button>
-    </div>
-
-    <!-- 차트 섹션 -->
-    <div class="chart-section">
-        <div class="chart-header">
-            <div class="chart-title">📊 통계</div>
-            <div class="chart-toggle">
-                <button class="chart-toggle-btn active" onclick="showChart('winRate')">승률</button>
-                <button class="chart-toggle-btn" onclick="showChart('monthly')">월별</button>
-                <button class="chart-toggle-btn" onclick="showChart('stadium')">구장</button>
-                <button class="chart-toggle-btn" onclick="showChart('homeAway')">홈/원정</button>
-            </div>
-        </div>
-
-        <!-- 승률 차트 -->
-        <div class="chart-container active" id="winRateChart">
-            <div class="win-rate-chart">
-                <div class="donut-chart">
-                    <svg width="120" height="120">
-                        <circle class="donut-ring" cx="60" cy="60" r="50"
-                                fill="none" stroke="#f0f0f0" stroke-width="20"></circle>
-                        <circle class="donut-segment" cx="60" cy="60" r="50"
-                                stroke="#16a34a"
-                                stroke-dasharray="186 314"
-                                stroke-linecap="round"></circle>
-                        <circle class="donut-segment" cx="60" cy="60" r="50"
-                                stroke="#dc2626"
-                                stroke-dasharray="130 314"
-                                stroke-dashoffset="-186"
-                                stroke-linecap="round"></circle>
-                    </svg>
-                    <div class="donut-text">
-                        <div class="donut-percentage">59%</div>
-                        <div class="donut-label">승률</div>
+            <section class="info-wrap">
+                <h2 class="section-tit" id="selectData01">시즌 선택</h2>
+                <div class="select-box" id="seasonSelect">
+                    <button type="button" class="select" title="시즌 선택을 위한 바텀시트 열기" aria-expanded="false" aria-haspopup="listbox" aria-controls="bottomSheet01">
+                        <span>2025 시즌</span>
+                    </button>
+                </div>
+                <div class="average-box">
+                    <ul>
+                        <li class="item">
+                            <div class="i-tit">총 관람</div>
+                            <div class="i-desc"><em>44</em>회</div>
+                        </li>
+                        <li class="item">
+                            <div class="i-tit">승률</div>
+                            <div class="i-desc"><em>59</em>%</div>
+                        </li>
+                        <li class="item">
+                            <div class="i-tit">총 지출</div>
+                            <div class="i-desc"><em>1.3</em>원</div>
+                        </li>
+                    </ul>
+                </div>
+            </section>
+            <!-- // -->
+            <ul class="cont-menu">
+                <li class="tab-menu-btn">
+                    <button class="tab active" data-link="section01">
+                        <span>전체</span>
+                    </button>
+                </li>
+                <li class="tab-menu-btn">
+                    <button class="tab" data-link="section02">
+                        <span>정규시즌</span>
+                    </button>
+                </li>
+                <li class="tab-menu-btn">
+                    <button class="tab" data-link="section03">
+                        <span>포스트시즌</span>
+                    </button>
+                </li>
+            </ul>
+            <!-- // -->
+            <section class="info-wrap">
+                <div class="game-date">
+                    <ul>
+                        <li class="day">2025.04.05</li>
+                        <li class="date">(토)</li>
+                        <li class="time">18:30</li>
+                    </ul>
+                    <div class="match-result" data-game="lose">
+                        <span>패</span>
                     </div>
                 </div>
-                <div class="win-rate-legend">
-                    <div class="legend-item">
-                        <div class="legend-label">
-                            <div class="legend-color" style="background: #16a34a;"></div>
-                            <span>승리</span>
+                <div class="game-info">
+                    <div class="game-img"></div>
+                    <div class="game-txt">
+                        <div class="match-wrap">
+                            <div class="match-info">${한화} VS ${KT}</div>
+                            <div class="match-point">(${5}:${3})</div>
                         </div>
-                        <div class="legend-value">26회 (59%)</div>
-                    </div>
-                    <div class="legend-item">
-                        <div class="legend-label">
-                            <div class="legend-color" style="background: #dc2626;"></div>
-                            <span>패배</span>
+                        <div class="stadium"><i class="kibun"></i><span>대전 한화생명</span></div>
+                        <div class="seat-info">
+                            <div class="seat">${1루 내야지정석}</div> / <div class="seat-price">${35,000}원</div>
                         </div>
-                        <div class="legend-value">18회 (41%)</div>
-                    </div>
-                    <div class="legend-item">
-                        <div class="legend-label">
-                            <div class="legend-color" style="background: #9ca3af;"></div>
-                            <span>무승부</span>
-                        </div>
-                        <div class="legend-value">0회 (0%)</div>
+                        <div class="companion"><i></i>함께(지인, 은진)</div>
                     </div>
                 </div>
-            </div>
-        </div>
-
-        <!-- 월별 차트 -->
-        <div class="chart-container" id="monthlyChart">
-            <div class="monthly-chart">
-                <div class="bar-chart">
-                    <div class="bar-item">
-                        <div class="bar" style="height: 40%;">
-                            <div class="bar-value">4</div>
-                        </div>
-                        <div class="bar-label">3월</div>
-                    </div>
-                    <div class="bar-item">
-                        <div class="bar" style="height: 80%;">
-                            <div class="bar-value">8</div>
-                        </div>
-                        <div class="bar-label">4월</div>
-                    </div>
-                    <div class="bar-item">
-                        <div class="bar" style="height: 100%;">
-                            <div class="bar-value">10</div>
-                        </div>
-                        <div class="bar-label">5월</div>
-                    </div>
-                    <div class="bar-item">
-                        <div class="bar" style="height: 70%;">
-                            <div class="bar-value">7</div>
-                        </div>
-                        <div class="bar-label">6월</div>
-                    </div>
-                    <div class="bar-item">
-                        <div class="bar" style="height: 60%;">
-                            <div class="bar-value">6</div>
-                        </div>
-                        <div class="bar-label">7월</div>
-                    </div>
-                    <div class="bar-item">
-                        <div class="bar" style="height: 90%;">
-                            <div class="bar-value">9</div>
-                        </div>
-                        <div class="bar-label">8월</div>
+            </section>
+            <!-- // -->
+            <section class="info-wrap">
+                <div class="game-date">
+                    <ul>
+                        <li class="day">2025.04.05</li>
+                        <li class="date">(토)</li>
+                        <li class="time">18:30</li>
+                    </ul>
+                    <div class="match-result" date-game="win">
+                        <span>승</span>
                     </div>
                 </div>
-            </div>
-        </div>
-
-        <!-- 구장별 차트 -->
-        <div class="chart-container" id="stadiumChart">
-            <div class="stadium-chart">
-                <div class="stadium-list">
-                    <div class="stadium-item">
-                        <div class="stadium-name">대전</div>
-                        <div class="stadium-bar-container">
-                            <div class="stadium-bar" style="width: 100%;"></div>
-                            <div class="stadium-count">28회</div>
+                <div class="game-info">
+                    <div class="game-img"></div>
+                    <div class="game-txt">
+                        <div class="match-wrap">
+                            <div class="match-info">${한화} VS ${삼성}</div>
+                            <div class="match-point">(${5}:${3})</div>
                         </div>
-                    </div>
-                    <div class="stadium-item">
-                        <div class="stadium-name">잠실</div>
-                        <div class="stadium-bar-container">
-                            <div class="stadium-bar" style="width: 35%;"></div>
-                            <div class="stadium-count">10회</div>
+                        <div class="stadium"><i class="kibun"></i><span>대전 한화생명</span></div>
+                        <div class="seat-info">
+                            <div class="seat">${1루 내야지정석}</div> / <div class="seat-price">${35,000}원</div>
                         </div>
-                    </div>
-                    <div class="stadium-item">
-                        <div class="stadium-name">고척</div>
-                        <div class="stadium-bar-container">
-                            <div class="stadium-bar" style="width: 18%;"></div>
-                            <div class="stadium-count">5회</div>
-                        </div>
-                    </div>
-                    <div class="stadium-item">
-                        <div class="stadium-name">기타</div>
-                        <div class="stadium-bar-container">
-                            <div class="stadium-bar" style="width: 4%;"></div>
-                            <div class="stadium-count">1회</div>
-                        </div>
+                        <div class="companion"><i></i>함께(지인, 은진)</div>
                     </div>
                 </div>
-            </div>
-        </div>
-
-        <!-- 홈/원정 차트 -->
-        <div class="chart-container" id="homeAwayChart">
-            <div class="win-rate-chart">
-                <div style="flex: 1;">
-                    <div style="text-align: center; margin-bottom: 20px;">
-                        <div style="font-size: 14px; color: #666; margin-bottom: 8px;">홈 경기</div>
-                        <div style="position: relative; display: inline-block;">
-                            <svg width="100" height="100">
-                                <circle cx="50" cy="50" r="40" fill="none" stroke="#f0f0f0" stroke-width="16"></circle>
-                                <circle cx="50" cy="50" r="40" fill="none" stroke="#FF6600" stroke-width="16"
-                                        stroke-dasharray="176 252" stroke-linecap="round"
-                                        transform="rotate(-90 50 50)"></circle>
-                            </svg>
-                            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
-                                <div style="font-size: 20px; font-weight: 700; color: #FF6600;">70%</div>
+            </section>
+            <!-- // -->
+            <section class="info-wrap">
+                <div class="top-section">
+                    <span class="t-tit">통계</span>
+                    <ul class="t-menu">
+                        <li class="t-item">
+                            <button class="active" data-link="graph01"><span>승률</span></button>
+                        </li>
+                        <li class="t-item">
+                            <button data-link="graph02"><span>월별</span></button>
+                        </li>
+                        <li class="t-item">
+                            <button data-link="graph03"><span>구장</span></button>
+                        </li>
+                        <li class="t-item">
+                            <button data-link="graph04"><span>홈/원정</span></button>
+                        </li>
+                    </ul>
+                </div>
+                <div class="btm-section">
+                    <div class="win-rate" id="graph01">
+                        <div class="grp-wrap">
+                            <div class="grp-img"></div>
+                            <div class="grp-txt">
+                                <span class="grp-num"><em>59</em>%</span>
+                                <span>승률</span>
                             </div>
                         </div>
-                        <div style="margin-top: 12px;">
-                            <div style="font-size: 13px; color: #666; margin-bottom: 4px;">총 30경기</div>
-                            <div style="font-size: 14px;"><span style="color: #16a34a; font-weight: 600;">21승</span> <span style="color: #dc2626; font-weight: 600;">9패</span></div>
-                        </div>
+                        <ul class="chart-wrap">
+                            <li class="chart" data-map="winning">
+                                <div class="txt">승리</div>
+                                <div class="percent-wrap">
+                                    <span class="num">26</span>
+                                    <span class="desc">회</span>
+                                    (<span class="percent">59</span>%)
+                                </div>
+                            </li>
+                            <li class="chart" data-map="losing">
+                                <div class="txt">패배</div>
+                                <div class="percent-wrap">
+                                    <span class="num">18</span>
+                                    <span class="desc">회</span>
+                                    (<span class="percent">41</span>%)
+                                </div>
+                            </li>
+                            <li class="chart" data-map="drawing">
+                                <div class="txt">무승부</div>
+                                <div class="percent-wrap">
+                                    <span class="num">0</span>
+                                    <span class="desc">회</span>
+                                    (<span class="percent">0</span>%)
+                                </div>
+                            </li>
+                        </ul>
                     </div>
-                </div>
-                <div style="flex: 1;">
-                    <div style="text-align: center; margin-bottom: 20px;">
-                        <div style="font-size: 14px; color: #666; margin-bottom: 8px;">원정 경기</div>
-                        <div style="position: relative; display: inline-block;">
-                            <svg width="100" height="100">
-                                <circle cx="50" cy="50" r="40" fill="none" stroke="#f0f0f0" stroke-width="16"></circle>
-                                <circle cx="50" cy="50" r="40" fill="none" stroke="#667eea" stroke-width="16"
-                                        stroke-dasharray="113 252" stroke-linecap="round"
-                                        transform="rotate(-90 50 50)"></circle>
-                            </svg>
-                            <div style="position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); text-align: center;">
-                                <div style="font-size: 20px; font-weight: 700; color: #667eea;">36%</div>
+                    <!-- // -->
+                    <div class="in-and-out">
+                        <div class="in-wrap">
+                            <div class="tit">홈 경기</div>
+                            <div class="grp-wrap">
+                                <div class="grp-img"></div>
+                                <div class="grp-txt"><em>70</em>%</div>
+                            </div>
+                            <div class="grp-txt">
+                                <div class="total-txt">총 <em>30</em>경기</div>
+                                <div class="winning-rate">
+                                    <div class="seung"><em>21</em>승</div>
+                                    <div class="pae"><em>9</em>패</div>
+                                </div>
                             </div>
                         </div>
-                        <div style="margin-top: 12px;">
-                            <div style="font-size: 13px; color: #666; margin-bottom: 4px;">총 14경기</div>
-                            <div style="font-size: 14px;"><span style="color: #16a34a; font-weight: 600;">5승</span> <span style="color: #dc2626; font-weight: 600;">9패</span></div>
+                        <div class="out-wrap">
+                            <div class="tit">원정 경기</div>
+                            <div class="grp-wrap">
+                                <div class="grp-img"></div>
+                                <div class="grp-txt"><em>70</em>%</div>
+                            </div>
+                            <div class="grp-txt">
+                                <div class="total-txt">총 <em>30</em>경기</div>
+                                <div class="winning-rate">
+                                    <div class="seung"><em>21</em>승</div>
+                                    <div class="pae"><em>9</em>패</div>
+                                </div>
+                            </div>
                         </div>
                     </div>
+                    <!-- // -->
+                    <div class="stadium-rate" id="graph03">
+                        <ul>
+                            <li>
+                                <div class="region">대전</div>
+                                <div class="grp-wrap">
+                                    <div class="grp"></div>
+                                    <div class="grp-txt">
+                                        <em>28</em>회
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="region">대전</div>
+                                <div class="grp-wrap">
+                                    <div class="grp"></div>
+                                    <div class="grp-txt">
+                                        <em>28</em>회
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="region">대전</div>
+                                <div class="grp-wrap">
+                                    <div class="grp"></div>
+                                    <div class="grp-txt">
+                                        <em>28</em>회
+                                    </div>
+                                </div>
+                            </li>
+                            <li>
+                                <div class="region">대전</div>
+                                <div class="grp-wrap">
+                                    <div class="grp"></div>
+                                    <div class="grp-txt">
+                                        <em>28</em>회
+                                    </div>
+                                </div>
+                            </li>
+                        </ul>
+                    </div>
+                    <!-- // -->
+                    <div class="monthly-rate" id="graph02">
+                        <ul>
+                            <li>
+                                <div class="rate">4</div>
+                                <div class="grp"></div>
+                                <div class="month">3월</div>
+                            </li>
+                            <li>
+                                <div class="rate">4</div>
+                                <div class="grp"></div>
+                                <div class="month">3월</div>
+                            </li>
+                            <li>
+                                <div class="rate">4</div>
+                                <div class="grp"></div>
+                                <div class="month">3월</div>
+                            </li>
+                            <li>
+                                <div class="rate">4</div>
+                                <div class="grp"></div>
+                                <div class="month">3월</div>
+                            </li>
+                            <li>
+                                <div class="rate">4</div>
+                                <div class="grp"></div>
+                                <div class="month">3월</div>
+                            </li>
+                            <li>
+                                <div class="rate">4</div>
+                                <div class="grp"></div>
+                                <div class="month">3월</div>
+                            </li>
+                        </ul>
+                    </div>
                 </div>
+            </section>
+            
+            <div class="link-btn-wrap">
+                <a href="#" class="link-btn" title="...페이지 이동하기"></a>
             </div>
+            <!-- ########################### [start]_하단 : 네비게이션 영역 ########################### -->
+            <nav class="nav-menu">
+                <ul>
+                    <li>
+                        <a href="#" aria-current="page" aria-label="홈페이지 이동하기">
+                            <i aria-hidden="true"></i>
+                            <span>홈</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" aria-label="직관기록 페이지 이동하기">
+                            <i aria-hidden="true"></i>
+                            <span>직관기록</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#" aria-label="소비기록 페이지 이동하기">
+                            <i aria-hidden="true"></i>
+                            <span>소비기록</span>
+                        </a>
+                    </li>
+                </ul>
+            </nav>
+            <!-- ########################### [end]_하단 : 네비게이션 영역 ########################### -->
         </div>
     </div>
+</div>
+<!-- ########################### [end]_컨텐츠 영역 ########################### -->
 
-    <div class="record-list">
-        <div class="record-card" onclick="viewRecord(1)">
-            <div class="record-header">
-                <div class="record-date">2025.04.05 (토) 18:30</div>
-                <div class="record-badge win">승</div>
+<!-- ########################### [start]_모달 영역 ########################### -->
+<div class="modal btm-sheet" id="bottomSheet01">
+    <div class="modal-container">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h6 class="modal-tit">경기 시즌</h6>
+                <button type="button" class="close-md" title="모달 닫기"></button>
             </div>
-            <div class="record-content">
-                <div class="record-image">📸</div>
-                <div class="record-info">
-                    <div class="record-match">한화 vs 삼성 (5:3)</div>
-                    <div class="record-details">
-                        <div class="record-detail">
-                            <span class="mood-emoji">😊</span><strong>대전 한화생명</strong>
-                        </div>
-                        <div class="record-detail">1루 내야지정석 / 35,000원</div>
-                        <div class="record-detail">👥 지인, 은진와 함께</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="record-card" onclick="viewRecord(2)">
-            <div class="record-header">
-                <div class="record-date">2025.03.28 (금) 18:30</div>
-                <div class="record-badge win">승</div>
-            </div>
-            <div class="record-content">
-                <div class="record-image">⚾</div>
-                <div class="record-info">
-                    <div class="record-match">한화 vs KT (7:2)</div>
-                    <div class="record-details">
-                        <div class="record-detail">
-                            <span class="mood-emoji">🤩</span><strong>대전 한화생명</strong>
-                        </div>
-                        <div class="record-detail">외야자유석 / 12,000원</div>
-                        <div class="record-detail">👤 혼자 관람</div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="record-card" onclick="viewRecord(3)">
-            <div class="record-header">
-                <div class="record-date">2025.03.22 (토) 14:00</div>
-                <div class="record-badge lose">패</div>
-            </div>
-            <div class="record-content">
-                <div class="record-image">🏟️</div>
-                <div class="record-info">
-                    <div class="record-match">한화 vs 두산 (3:8)</div>
-                    <div class="record-details">
-                        <div class="record-detail">
-                            <span class="mood-emoji">😐</span><strong>잠실 야구장</strong>
-                        </div>
-                        <div class="record-detail">3루 테이블석 / 45,000원</div>
-                        <div class="record-detail">👥 가족과 함께</div>
-                    </div>
-                </div>
+            <div class="modal-content">
+                <ul class="option-btn-wrap" role="listbox" aria-labelledby="selectData01">
+                    <li class="option-btn" role="presentation">
+                        <button type="button" value="" class="option" role="option" aria-selected="true">
+                            <span>2021</span>
+                        </button>
+                    </li>
+                    <li class="option-btn" role="presentation">
+                        <button type="button" value="" class="option" role="option" aria-selected="false">
+                            <span>2022</span>
+                        </button>
+                    </li>
+                    <li class="option-btn" role="presentation">
+                        <button type="button" value="" class="option" role="option" aria-selected="false">
+                            <span>2023</span>
+                        </button>
+                    </li>
+                    <li class="option-btn" role="presentation">
+                        <button type="button" value="" class="option" role="option" aria-selected="false">
+                            <span>2024</span>
+                        </button>
+                    </li>
+                    <li class="option-btn" role="presentation">
+                        <button type="button" value="" class="option" role="option" aria-selected="false">
+                            <span>2025</span>
+                        </button>
+                    </li>
+                    <li class="option-btn" role="presentation">
+                        <button type="button" value="" class="option" role="option" aria-selected="false">
+                            <span>2026</span>
+                        </button>
+                    </li>
+                </ul>
             </div>
         </div>
     </div>
 </div>
+<!-- ########################### [end]_모달 영역 ########################### -->
 
-<div class="fab" onclick="addRecord()">+</div>
-
-<div class="bottom-nav">
-    <a href="dashboard.html" class="nav-item">
-        <div class="nav-icon">🏠</div>
-        <div>홈</div>
-    </a>
-    <a href="#" class="nav-item active">
-        <div class="nav-icon">⚾</div>
-        <div>직관기록</div>
-    </a>
-    <a href="#" class="nav-item" onclick="alert('소비기록 페이지 (구현 예정)'); return false;">
-        <div class="nav-icon">💰</div>
-        <div>소비기록</div>
-    </a>
+<!-- ########################### [start]_사이드메뉴 영역 ########################### -->
+<div class="side-menu">
+    <div class="menu-wrap">
+        <div class="menu-content">
+            <div class="menu-header">
+                <div class="team-name">한화 이글스<i class="ico-none"></i></div>
+                <div class="nickname"><em>기록해연</em>님</div>
+            </div>
+            <div class="menu-body">
+                <ul>
+                    <li>
+                        <a href="#">
+                            <i aria-hidden="true"></i>
+                            <span>종목 관리</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i aria-hidden="true"></i>
+                            <span>우리팀 변경</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <i aria-hidden="true"></i>
+                            <span>문의하기 / 의견 보내기</span>
+                        </a>
+                    </li>
+                    <li>
+                        <button type="button"><span>데이터 초기화</span></button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
 </div>
+<!-- ########################### [end]_사이드메뉴 영역 ########################### -->
 
-<script>
-        function changeSeason() {
-            const select = document.getElementById('seasonSelect');
-            alert(`${select.value} 시즌으로 변경`);
-        }
-
-        function viewRecord(id) {
-            alert(`기록 상세보기 (ID: ${id})`);
-            window.location.href = 'record-detail.html';
-        }
-
-        function addRecord() {
-            window.location.href = 'record-add.html';
-        }
-
-        function showChart(type) {
-            // 토글 버튼 활성화
-            document.querySelectorAll('.chart-toggle-btn').forEach(btn => {
-                btn.classList.remove('active');
-            });
-            event.target.classList.add('active');
-
-            // 차트 전환
-            document.querySelectorAll('.chart-container').forEach(chart => {
-                chart.classList.remove('active');
-            });
-
-            if (type === 'winRate') {
-                document.getElementById('winRateChart').classList.add('active');
-            } else if (type === 'monthly') {
-                document.getElementById('monthlyChart').classList.add('active');
-            } else if (type === 'stadium') {
-                document.getElementById('stadiumChart').classList.add('active');
-            } else if (type === 'homeAway') {
-                document.getElementById('homeAwayChart').classList.add('active');
-            }
-        }
-    </script>
 </body>
 </html>
